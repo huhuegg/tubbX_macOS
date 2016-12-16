@@ -1,0 +1,20 @@
+
+github "Alamofire/Alamofire" ~> 4.0
+
+github "Alamofire/AlamofireImage" ~> 3.1
+
+github "rhodgkins/SwiftHTTPStatusCodes" ~> 3.1
+
+github "radex/SwiftyUserDefaults"
+
+github "krzyzanowskim/CryptoSwift"
+
+github "SwiftyJSON/SwiftyJSON"
+
+github "SnapKit/SnapKit" ~> 3.0.2
+
+github "onevcat/Kingfisher" ~> 3.0
+
+github "swisspol/GCDWebServer" ~> 3.2.5
+
+github "marmelroy/Localize-Swift"
