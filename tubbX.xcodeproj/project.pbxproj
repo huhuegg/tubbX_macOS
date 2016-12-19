@@ -7,14 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31688FDA1E0779FE007CDAE8 /* ScreenRTMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31688FD91E0779FE007CDAE8 /* ScreenRTMP.swift */; };
+		316890301E07954E007CDAE8 /* lf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3168902E1E07954E007CDAE8 /* lf.framework */; };
+		316890311E07954E007CDAE8 /* lf.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3168902E1E07954E007CDAE8 /* lf.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		316890321E07954E007CDAE8 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3168902F1E07954E007CDAE8 /* XCGLogger.framework */; };
+		316890331E07954E007CDAE8 /* XCGLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3168902F1E07954E007CDAE8 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		31FFC4981E03F2E7001D8B8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31FFC4971E03F2E7001D8B8A /* Assets.xcassets */; };
 		31FFC49B1E03F2E8001D8B8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31FFC4991E03F2E8001D8B8A /* Main.storyboard */; };
 		31FFC4A41E03F36C001D8B8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */; };
 		31FFC4A81E03F37D001D8B8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4A71E03F37D001D8B8A /* ViewController.swift */; };
 		31FFC4AB1E03F49F001D8B8A /* MNScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4AA1E03F49F001D8B8A /* MNScreenRecorder.swift */; };
+		31FFC4AD1E0401E8001D8B8A /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 31FFC4AC1E0401E8001D8B8A /* Cartfile */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		316890241E07944D007CDAE8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				316890311E07954E007CDAE8 /* lf.framework in Embed Frameworks */,
+				316890331E07954E007CDAE8 /* XCGLogger.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		31688FD91E0779FE007CDAE8 /* ScreenRTMP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRTMP.swift; sourceTree = "<group>"; };
+		3168902E1E07954E007CDAE8 /* lf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = lf.framework; path = Carthage/Build/Mac/lf.framework; sourceTree = "<group>"; };
+		3168902F1E07954E007CDAE8 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/Mac/XCGLogger.framework; sourceTree = "<group>"; };
 		31FFC4901E03F2E7001D8B8A /* tubbX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tubbX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31FFC4971E03F2E7001D8B8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		31FFC49A1E03F2E8001D8B8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -23,6 +47,7 @@
 		31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = src/AppDelegate.swift; sourceTree = "<group>"; };
 		31FFC4A71E03F37D001D8B8A /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		31FFC4AA1E03F49F001D8B8A /* MNScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNScreenRecorder.swift; sourceTree = "<group>"; };
+		31FFC4AC1E0401E8001D8B8A /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,17 +55,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				316890301E07954E007CDAE8 /* lf.framework in Frameworks */,
+				316890321E07954E007CDAE8 /* XCGLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		31688FE21E077AFA007CDAE8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3168902E1E07954E007CDAE8 /* lf.framework */,
+				3168902F1E07954E007CDAE8 /* XCGLogger.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		31FFC4871E03F2E7001D8B8A = {
 			isa = PBXGroup;
 			children = (
 				31FFC4921E03F2E7001D8B8A /* tubbX */,
+				31688FE21E077AFA007CDAE8 /* Frameworks */,
 				31FFC4911E03F2E7001D8B8A /* Products */,
+				31FFC4AC1E0401E8001D8B8A /* Cartfile */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				31FFC4AA1E03F49F001D8B8A /* MNScreenRecorder.swift */,
+				31688FD91E0779FE007CDAE8 /* ScreenRTMP.swift */,
 			);
 			name = core;
 			path = src/core;
@@ -102,6 +141,7 @@
 				31FFC48C1E03F2E7001D8B8A /* Sources */,
 				31FFC48D1E03F2E7001D8B8A /* Frameworks */,
 				31FFC48E1E03F2E7001D8B8A /* Resources */,
+				316890241E07944D007CDAE8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -152,6 +192,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31FFC4AD1E0401E8001D8B8A /* Cartfile in Resources */,
 				31FFC4981E03F2E7001D8B8A /* Assets.xcassets in Resources */,
 				31FFC49B1E03F2E8001D8B8A /* Main.storyboard in Resources */,
 			);
@@ -166,6 +207,7 @@
 			files = (
 				31FFC4A81E03F37D001D8B8A /* ViewController.swift in Sources */,
 				31FFC4AB1E03F49F001D8B8A /* MNScreenRecorder.swift in Sources */,
+				31688FDA1E0779FE007CDAE8 /* ScreenRTMP.swift in Sources */,
 				31FFC4A41E03F36C001D8B8A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,7 +266,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -267,7 +309,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -282,9 +324,15 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = QR2ZFRE3WH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = tubbX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lugq1001.tubbX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "tubbX/tubbX-Bridging-Header.h";
@@ -301,9 +349,15 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = QR2ZFRE3WH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/libs",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = tubbX/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lugq1001.tubbX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "tubbX/tubbX-Bridging-Header.h";
@@ -330,6 +384,7 @@
 				31FFC4A11E03F2E8001D8B8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

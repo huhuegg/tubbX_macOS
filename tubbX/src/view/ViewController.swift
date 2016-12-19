@@ -7,13 +7,21 @@
 //
 
 import Cocoa
+import lf
+
 
 class ViewController: NSViewController {
 
+    var lfView: GLLFView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        lfView = GLLFView(frame: NSRect(x: 0, y: 0, width: 480, height: 270))
+        view.addSubview(lfView)
+        
+        
+        let rtmp = ScreenRTMP(view: lfView)
     }
 
     override var representedObject: Any? {

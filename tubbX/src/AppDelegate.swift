@@ -12,6 +12,10 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var item: NSStatusItem!
+    
+    
+    
+    
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         item = NSStatusBar.system().statusItem(withLength: 20)
@@ -29,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func recordScreen() {
         Swift.print("recordScreen")
-        //let s = CVPixelBufferGetBytesPerRow(<#T##pixelBuffer: CVPixelBuffer##CVPixelBuffer#>)
+        
     }
 }
 
