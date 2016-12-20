@@ -29,12 +29,12 @@ class MNScreenRecorder: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, 
         input = AVCaptureScreenInput(displayID: CGMainDisplayID())
         input.capturesMouseClicks = true
         input.minFrameDuration = CMTime(seconds: 1.0, preferredTimescale: 60)
-        input.scaleFactor = 0.5
+        input.scaleFactor = 1.0
         var cropRect = CGRect.zero
         if let screen = NSScreen.screens()?.first {
             cropRect = screen.frame
         }
-        input.cropRect = CGRect(x: 0, y: 0, width: 640, height: 640)
+        input.cropRect = CGRect(x: 0, y: 0, width: 1280, height: 720)
         
         
 //        output = AVCaptureVideoDataOutput()
