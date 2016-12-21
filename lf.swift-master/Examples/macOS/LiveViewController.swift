@@ -4,7 +4,7 @@ import AVFoundation
 import VideoToolbox
 
 final class LiveViewController: NSViewController {
-    static let defaultURL:String = "rtmp://222.73.196.99/hls"
+    static let defaultURL:String = "rtmp://222.73.196.99/hls/"
     
     var enabledSharedObject:Bool = false
     var rtmpConnection:RTMPConnection = RTMPConnection()
