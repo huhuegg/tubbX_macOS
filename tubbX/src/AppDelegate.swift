@@ -11,29 +11,23 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    var item: NSStatusItem!
     
-    
-    
-    
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        item = NSStatusBar.system().statusItem(withLength: 20)
-        let image = NSImage(named: "ic_statusBar")
-        image?.isTemplate = true
-        item.image = image
-        item.highlightMode = true
-        item.action = #selector(recordScreen)
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-
-
-    func recordScreen() {
-        Swift.print("recordScreen")
-        
+    
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        if flag {
+            return false
+        } else {
+            LoginWindowController.instance.showWindow(self)
+        }
+        return true
     }
+
 }
 

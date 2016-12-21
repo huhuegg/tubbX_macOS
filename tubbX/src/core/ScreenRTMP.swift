@@ -56,7 +56,7 @@ class ScreenRTMP: NSObject {
             "continuousAutofocus": false, // use camera autofocus mode
             "continuousExposure": false, //  use camera exposure mode
         ]
-        
+        /*
         rtmpStream.videoSettings = [
             "width": 1280, // video output width
             "height": 720, // video output height
@@ -65,7 +65,7 @@ class ScreenRTMP: NSObject {
             "profileLevel": kVTProfileLevel_H264_Baseline_4_0, // H264 Profile require "import VideoToolbox"
             "maxKeyFrameIntervalDuration": 15, // key frame / sec
         ]
-        
+        */
         // "0" means the same of input
         //        rtmpStream.recorderSettings = [
         //            AVMediaTypeAudio: [
@@ -103,12 +103,12 @@ class ScreenRTMP: NSObject {
             input.cropRect = cropRect
             rtmpStream.attachScreen(input)
         }
-        rtmpStream.attachAudio(DeviceUtil.device(withLocalizedName: audioPopUpButton.itemTitles[audioPopUpButton.indexOfSelectedItem], mediaType: AVMediaTypeAudio))
-        
-        rtmpStream.addObserver(self, forKeyPath: "currentFPS", options: .new, context: nil)
-        publishButton.target = self
-        
-        lfView.attachStream(rtmpStream)
+//        rtmpStream.attachAudio(DeviceUtil.device(withLocalizedName: audioPopUpButton.itemTitles[audioPopUpButton.indexOfSelectedItem], mediaType: AVMediaTypeAudio))
+//        
+//        rtmpStream.addObserver(self, forKeyPath: "currentFPS", options: .new, context: nil)
+//        publishButton.target = self
+//        
+//        lfView.attachStream(rtmpStream)
         
     }
     

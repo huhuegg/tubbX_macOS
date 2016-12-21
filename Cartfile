@@ -11,7 +11,7 @@
 
 #github "SwiftyJSON/SwiftyJSON"
 
-#github "SnapKit/SnapKit" ~> 3.0.2
+github "SnapKit/SnapKit" ~> 3.0.2
 
 #github "onevcat/Kingfisher" ~> 3.0
 

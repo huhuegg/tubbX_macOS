@@ -12,11 +12,19 @@
 		316890311E07954E007CDAE8 /* lf.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3168902E1E07954E007CDAE8 /* lf.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		316890321E07954E007CDAE8 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3168902F1E07954E007CDAE8 /* XCGLogger.framework */; };
 		316890331E07954E007CDAE8 /* XCGLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3168902F1E07954E007CDAE8 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		31A7F22D1E0A20E800DC53E3 /* AppStatusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F22C1E0A20E800DC53E3 /* AppStatusItem.swift */; };
+		31A7F2301E0A275100DC53E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31A7F22E1E0A275100DC53E3 /* Main.storyboard */; };
+		31A7F24D1E0A27EA00DC53E3 /* BaseWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F24C1E0A27EA00DC53E3 /* BaseWindowController.swift */; };
+		31A7F24F1E0A280100DC53E3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F24E1E0A280100DC53E3 /* BaseViewController.swift */; };
+		31A7F2521E0A282600DC53E3 /* LoginWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F2511E0A282600DC53E3 /* LoginWindowController.swift */; };
+		31A7F2541E0A283A00DC53E3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F2531E0A283A00DC53E3 /* LoginViewController.swift */; };
+		31A7F2591E0A34D500DC53E3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F2581E0A34D500DC53E3 /* Logger.swift */; };
+		31A7F25B1E0A352B00DC53E3 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31A7F25A1E0A352B00DC53E3 /* SnapKit.framework */; };
+		31A7F25C1E0A352B00DC53E3 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31A7F25A1E0A352B00DC53E3 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		31A7F25E1E0A4AAF00DC53E3 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F25D1E0A4AAF00DC53E3 /* QRCode.swift */; };
 		31FFC4981E03F2E7001D8B8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31FFC4971E03F2E7001D8B8A /* Assets.xcassets */; };
-		31FFC49B1E03F2E8001D8B8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31FFC4991E03F2E8001D8B8A /* Main.storyboard */; };
 		31FFC4A41E03F36C001D8B8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */; };
-		31FFC4A81E03F37D001D8B8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4A71E03F37D001D8B8A /* ViewController.swift */; };
-		31FFC4AB1E03F49F001D8B8A /* MNScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4AA1E03F49F001D8B8A /* MNScreenRecorder.swift */; };
+		31FFC4AB1E03F49F001D8B8A /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4AA1E03F49F001D8B8A /* ScreenRecorder.swift */; };
 		31FFC4AD1E0401E8001D8B8A /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 31FFC4AC1E0401E8001D8B8A /* Cartfile */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +35,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				31A7F25C1E0A352B00DC53E3 /* SnapKit.framework in Embed Frameworks */,
 				316890311E07954E007CDAE8 /* lf.framework in Embed Frameworks */,
 				316890331E07954E007CDAE8 /* XCGLogger.framework in Embed Frameworks */,
 			);
@@ -39,14 +48,21 @@
 		31688FD91E0779FE007CDAE8 /* ScreenRTMP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRTMP.swift; sourceTree = "<group>"; };
 		3168902E1E07954E007CDAE8 /* lf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = lf.framework; path = Carthage/Build/Mac/lf.framework; sourceTree = "<group>"; };
 		3168902F1E07954E007CDAE8 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/Mac/XCGLogger.framework; sourceTree = "<group>"; };
+		31A7F22C1E0A20E800DC53E3 /* AppStatusItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStatusItem.swift; sourceTree = "<group>"; };
+		31A7F22F1E0A275100DC53E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		31A7F24C1E0A27EA00DC53E3 /* BaseWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWindowController.swift; sourceTree = "<group>"; };
+		31A7F24E1E0A280100DC53E3 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		31A7F2511E0A282600DC53E3 /* LoginWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWindowController.swift; sourceTree = "<group>"; };
+		31A7F2531E0A283A00DC53E3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		31A7F2581E0A34D500DC53E3 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		31A7F25A1E0A352B00DC53E3 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/Mac/SnapKit.framework; sourceTree = "<group>"; };
+		31A7F25D1E0A4AAF00DC53E3 /* QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCode.swift; sourceTree = "<group>"; };
 		31FFC4901E03F2E7001D8B8A /* tubbX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tubbX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31FFC4971E03F2E7001D8B8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		31FFC49A1E03F2E8001D8B8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		31FFC49C1E03F2E8001D8B8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31FFC4A21E03F36B001D8B8A /* tubbX-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "tubbX-Bridging-Header.h"; sourceTree = "<group>"; };
 		31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = src/AppDelegate.swift; sourceTree = "<group>"; };
-		31FFC4A71E03F37D001D8B8A /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		31FFC4AA1E03F49F001D8B8A /* MNScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNScreenRecorder.swift; sourceTree = "<group>"; };
+		31FFC4AA1E03F49F001D8B8A /* ScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
 		31FFC4AC1E0401E8001D8B8A /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31A7F25B1E0A352B00DC53E3 /* SnapKit.framework in Frameworks */,
 				316890301E07954E007CDAE8 /* lf.framework in Frameworks */,
 				316890321E07954E007CDAE8 /* XCGLogger.framework in Frameworks */,
 			);
@@ -66,10 +83,39 @@
 		31688FE21E077AFA007CDAE8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				31A7F25A1E0A352B00DC53E3 /* SnapKit.framework */,
 				3168902E1E07954E007CDAE8 /* lf.framework */,
 				3168902F1E07954E007CDAE8 /* XCGLogger.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		31A7F22B1E0A20D300DC53E3 /* widget */ = {
+			isa = PBXGroup;
+			children = (
+				31A7F22C1E0A20E800DC53E3 /* AppStatusItem.swift */,
+			);
+			name = widget;
+			path = src/widget;
+			sourceTree = "<group>";
+		};
+		31A7F2501E0A280900DC53E3 /* login */ = {
+			isa = PBXGroup;
+			children = (
+				31A7F2511E0A282600DC53E3 /* LoginWindowController.swift */,
+				31A7F2531E0A283A00DC53E3 /* LoginViewController.swift */,
+			);
+			name = login;
+			sourceTree = "<group>";
+		};
+		31A7F2551E0A321500DC53E3 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				31A7F2581E0A34D500DC53E3 /* Logger.swift */,
+				31A7F25D1E0A4AAF00DC53E3 /* QRCode.swift */,
+			);
+			name = util;
+			path = src/util;
 			sourceTree = "<group>";
 		};
 		31FFC4871E03F2E7001D8B8A = {
@@ -94,8 +140,10 @@
 			isa = PBXGroup;
 			children = (
 				31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */,
-				31FFC4A51E03F37D001D8B8A /* core */,
 				31FFC4A61E03F37D001D8B8A /* view */,
+				31FFC4A51E03F37D001D8B8A /* core */,
+				31A7F22B1E0A20D300DC53E3 /* widget */,
+				31A7F2551E0A321500DC53E3 /* util */,
 				31FFC4A91E03F38A001D8B8A /* support */,
 			);
 			path = tubbX;
@@ -104,7 +152,7 @@
 		31FFC4A51E03F37D001D8B8A /* core */ = {
 			isa = PBXGroup;
 			children = (
-				31FFC4AA1E03F49F001D8B8A /* MNScreenRecorder.swift */,
+				31FFC4AA1E03F49F001D8B8A /* ScreenRecorder.swift */,
 				31688FD91E0779FE007CDAE8 /* ScreenRTMP.swift */,
 			);
 			name = core;
@@ -114,7 +162,9 @@
 		31FFC4A61E03F37D001D8B8A /* view */ = {
 			isa = PBXGroup;
 			children = (
-				31FFC4A71E03F37D001D8B8A /* ViewController.swift */,
+				31A7F24C1E0A27EA00DC53E3 /* BaseWindowController.swift */,
+				31A7F24E1E0A280100DC53E3 /* BaseViewController.swift */,
+				31A7F2501E0A280900DC53E3 /* login */,
 			);
 			name = view;
 			path = src/view;
@@ -124,9 +174,9 @@
 			isa = PBXGroup;
 			children = (
 				31FFC4971E03F2E7001D8B8A /* Assets.xcassets */,
-				31FFC4991E03F2E8001D8B8A /* Main.storyboard */,
 				31FFC49C1E03F2E8001D8B8A /* Info.plist */,
 				31FFC4A21E03F36B001D8B8A /* tubbX-Bridging-Header.h */,
+				31A7F22E1E0A275100DC53E3 /* Main.storyboard */,
 			);
 			name = support;
 			sourceTree = "<group>";
@@ -159,7 +209,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "陆广庆";
 				TargetAttributes = {
 					31FFC48F1E03F2E7001D8B8A = {
@@ -192,9 +242,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31A7F2301E0A275100DC53E3 /* Main.storyboard in Resources */,
 				31FFC4AD1E0401E8001D8B8A /* Cartfile in Resources */,
 				31FFC4981E03F2E7001D8B8A /* Assets.xcassets in Resources */,
-				31FFC49B1E03F2E8001D8B8A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,20 +255,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31FFC4A81E03F37D001D8B8A /* ViewController.swift in Sources */,
-				31FFC4AB1E03F49F001D8B8A /* MNScreenRecorder.swift in Sources */,
+				31A7F2541E0A283A00DC53E3 /* LoginViewController.swift in Sources */,
+				31FFC4AB1E03F49F001D8B8A /* ScreenRecorder.swift in Sources */,
+				31A7F24D1E0A27EA00DC53E3 /* BaseWindowController.swift in Sources */,
+				31A7F2521E0A282600DC53E3 /* LoginWindowController.swift in Sources */,
+				31A7F2591E0A34D500DC53E3 /* Logger.swift in Sources */,
 				31688FDA1E0779FE007CDAE8 /* ScreenRTMP.swift in Sources */,
 				31FFC4A41E03F36C001D8B8A /* AppDelegate.swift in Sources */,
+				31A7F24F1E0A280100DC53E3 /* BaseViewController.swift in Sources */,
+				31A7F22D1E0A20E800DC53E3 /* AppStatusItem.swift in Sources */,
+				31A7F25E1E0A4AAF00DC53E3 /* QRCode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		31FFC4991E03F2E8001D8B8A /* Main.storyboard */ = {
+		31A7F22E1E0A275100DC53E3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				31FFC49A1E03F2E8001D8B8A /* Base */,
+				31A7F22F1E0A275100DC53E3 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -244,6 +300,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -293,6 +350,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
