@@ -13,15 +13,15 @@ import VideoToolbox
 
 class ScreenRTMP: NSObject {
     
-    static let kPublishURL = "rtmp://222.73.196.99/hls/"
+    static let kPublishURL = "rtmp://222.73.196.99/hls"
     
     var connection = RTMPConnection()
     var stream: RTMPStream!
     
-    static var publishUrl: String {
+    static var playUrl: String {
         //let deviceNumber = AppHelper.deviceSerialNumber()
         //let rtmpUrl = "\(deviceNumber)"
-        return ScreenRTMP.kPublishURL
+        return ScreenRTMP.kPublishURL + "/live"
     }
     
     override init() {
@@ -79,7 +79,7 @@ class ScreenRTMP: NSObject {
         stream.attachScreen(input)
         //stream.attachAudio(DeviceUtil.device(withLocalizedName: audioPopUpButton.itemTitles[audioPopUpButton.indexOfSelectedItem], mediaType: AVMediaTypeAudio))
         connection.addEventListener(Event.RTMP_STATUS, selector:#selector(ScreenRTMP.rtmpStatusHandler(_:)), observer: self)
-        connection.connect(ScreenRTMP.publishUrl)
+        connection.connect(ScreenRTMP.kPublishURL)
     }
     
     func stopPublish() {

@@ -39,7 +39,7 @@ class LoginViewController: BaseViewController {
         
         let size = view.frame.size.width - LoginViewController.kViewPadding * 2
         
-        let qrCode = ScreenRTMP.publishUrl
+        let qrCode = ScreenRTMP.playUrl
         Logger.print("qrCode:\(qrCode)")
         if let image = QRCode.generateQRImage(from: qrCode, size: size) {
             qrImageView.image = image
