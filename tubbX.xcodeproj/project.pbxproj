@@ -23,6 +23,7 @@
 		31A7F25C1E0A352B00DC53E3 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31A7F25A1E0A352B00DC53E3 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		31A7F25E1E0A4AAF00DC53E3 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F25D1E0A4AAF00DC53E3 /* QRCode.swift */; };
 		31A7F2601E0A66DD00DC53E3 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F25F1E0A66DD00DC53E3 /* AppHelper.swift */; };
+		31FC8E161E448B1A003B19BA /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FC8E151E448B1A003B19BA /* BaseRequest.swift */; };
 		31FFC4981E03F2E7001D8B8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31FFC4971E03F2E7001D8B8A /* Assets.xcassets */; };
 		31FFC4A41E03F36C001D8B8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */; };
 		31FFC4AB1E03F49F001D8B8A /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4AA1E03F49F001D8B8A /* ScreenRecorder.swift */; };
@@ -59,6 +60,7 @@
 		31A7F25A1E0A352B00DC53E3 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/Mac/SnapKit.framework; sourceTree = "<group>"; };
 		31A7F25D1E0A4AAF00DC53E3 /* QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCode.swift; sourceTree = "<group>"; };
 		31A7F25F1E0A66DD00DC53E3 /* AppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
+		31FC8E151E448B1A003B19BA /* BaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
 		31FFC4901E03F2E7001D8B8A /* tubbX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tubbX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31FFC4971E03F2E7001D8B8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		31FFC49C1E03F2E8001D8B8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -121,6 +123,15 @@
 			path = src/util;
 			sourceTree = "<group>";
 		};
+		31FC8E141E448AFF003B19BA /* network */ = {
+			isa = PBXGroup;
+			children = (
+				31FC8E151E448B1A003B19BA /* BaseRequest.swift */,
+			);
+			name = network;
+			path = src/network;
+			sourceTree = "<group>";
+		};
 		31FFC4871E03F2E7001D8B8A = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +157,7 @@
 				31FFC4A61E03F37D001D8B8A /* view */,
 				31FFC4A51E03F37D001D8B8A /* core */,
 				31A7F22B1E0A20D300DC53E3 /* widget */,
+				31FC8E141E448AFF003B19BA /* network */,
 				31A7F2551E0A321500DC53E3 /* util */,
 				31FFC4A91E03F38A001D8B8A /* support */,
 			);
@@ -266,6 +278,7 @@
 				31688FDA1E0779FE007CDAE8 /* ScreenRTMP.swift in Sources */,
 				31FFC4A41E03F36C001D8B8A /* AppDelegate.swift in Sources */,
 				31A7F24F1E0A280100DC53E3 /* BaseViewController.swift in Sources */,
+				31FC8E161E448B1A003B19BA /* BaseRequest.swift in Sources */,
 				31A7F22D1E0A20E800DC53E3 /* AppStatusItem.swift in Sources */,
 				31A7F2601E0A66DD00DC53E3 /* AppHelper.swift in Sources */,
 				31A7F25E1E0A4AAF00DC53E3 /* QRCode.swift in Sources */,

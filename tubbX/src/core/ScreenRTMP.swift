@@ -71,8 +71,6 @@ class ScreenRTMP: NSObject {
         //            ],
         //        ]
         
-        
-
     }
     
     func startPublish(input: AVCaptureScreenInput) {
