@@ -10,6 +10,8 @@ import Cocoa
 
 class BaseViewController: NSViewController {
 
+    let kIdentifier = UUID().uuidString
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.

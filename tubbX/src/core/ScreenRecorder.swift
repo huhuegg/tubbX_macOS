@@ -38,9 +38,9 @@ class ScreenRecorder: NSObject {
         return recording
     }
     
-    func startRecord() {
+    func startRecord(publishUrl: String) {
         recording = true
-        rtmp.startPublish(input: input)
+        rtmp.startPublish(input: input, url: publishUrl)
     }
     
     func stopRecord() {
