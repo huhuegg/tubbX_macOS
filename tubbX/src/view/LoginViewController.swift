@@ -177,7 +177,6 @@ class LoginViewController: BaseViewController {
                 // 开始屏幕分享
                 progressIndicator.stopAnimation(self)
                 (shareScreenButton.cell as! NSButtonCell).attributedTitle = buttonTitle("结束屏幕分享")
-                LoginWindowController.instance.close()
                 let record = ScreenRecorder.sharedInstance
                 record.startRecord(publishUrl: publishUrl)
             case "StopRecord":

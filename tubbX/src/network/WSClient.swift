@@ -17,6 +17,7 @@ class WSClient: NSObject, WebSocketDelegate {
     var socket: WebSocket!
     var heartBeatTimer: Timer!
     var messages: [String] = []
+    var reconnect = true
     
     static var sharedInstance: WSClient {
         return wsClient
@@ -30,11 +31,13 @@ class WSClient: NSObject, WebSocketDelegate {
     
     
     func start() {
+        reconnect = true
         messages = []
         socket.connect()
     }
     
     func stop() {
+        reconnect = false
         socket.disconnect()
     }
     
@@ -60,9 +63,13 @@ class WSClient: NSObject, WebSocketDelegate {
     
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         Swift.print("websocketDidDisconnect:\(error?.localizedDescription)")
-        if heartBeatTimer != nil && heartBeatTimer.isValid {
-            heartBeatTimer.invalidate()
-            heartBeatTimer = nil
+        if reconnect {
+            socket.connect()
+        } else {
+            if heartBeatTimer != nil && heartBeatTimer.isValid {
+                heartBeatTimer.invalidate()
+                heartBeatTimer = nil
+            }
         }
     }
     
