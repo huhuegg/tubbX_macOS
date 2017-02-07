@@ -24,7 +24,7 @@ class WSClient: NSObject, WebSocketDelegate {
     
     override init() {
         super.init()
-        socket = WebSocket(url: URL(string: "ws://192.168.242.253:8020/remote_client")!)
+        socket = WebSocket(url: URL(string: "ws://192.168.242.253:8021/remote_client")!)
         socket.delegate = self
     }
     
@@ -81,7 +81,12 @@ class WSClient: NSObject, WebSocketDelegate {
             userInfo["ret_code"] = json["ret_code"].intValue
             switch command {
             case "Register":
-                userInfo["qr"] = json["qr"].string
+                if let qr = json["qr"].string {
+                    userInfo["qr"] = qr
+                } else {
+                    userInfo["publishUrl"] = json["publishUrl"].stringValue
+                }
+                
             case "BindClient":
                 userInfo["publishUrl"] = json["publishUrl"].string
             case "StartRecord":

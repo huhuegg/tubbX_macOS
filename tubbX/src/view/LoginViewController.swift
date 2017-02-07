@@ -155,9 +155,16 @@ class LoginViewController: BaseViewController {
                 // 设备注册
                 progressIndicator.stopAnimation(self)
                 if ret_code == 0 {
-                    // TODO 是否需要重新绑定
-                    let qr = userInfo["qr"] as! String
-                    showQRImage(qr)
+                    if let qr = userInfo["qr"] {
+                        let q = qr as! String
+                        showQRImage(q)
+                    } else {
+                        // 已绑定
+                        publishUrl = userInfo["publishUrl"] as! String
+                        qrImageView.isHidden = true
+                        shareScreenButton.isHidden = false
+                    }
+                    
                 } else {
                     tipLabel.stringValue = ret_msg
                 }
