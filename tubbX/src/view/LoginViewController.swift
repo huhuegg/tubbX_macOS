@@ -170,22 +170,28 @@ class LoginViewController: BaseViewController {
                 }
             case "BindClient":
                 // 绑定设备成功
+                Logger.print("绑定设备成功")
                 publishUrl = userInfo["publishUrl"] as! String
                 qrImageView.isHidden = true
                 shareScreenButton.isHidden = false
             case "StartRecord":
                 // 开始屏幕分享
+                Logger.print("开始屏幕分享")
                 progressIndicator.stopAnimation(self)
+                shareScreenButton.isHidden = false
                 (shareScreenButton.cell as! NSButtonCell).attributedTitle = buttonTitle("结束屏幕分享")
                 let record = ScreenRecorder.sharedInstance
                 record.startRecord(publishUrl: publishUrl)
             case "StopRecord":
                 // 结束屏幕分享
+                Logger.print("结束屏幕分享")
+                shareScreenButton.isHidden = false
                 progressIndicator.stopAnimation(self)
                 let record = ScreenRecorder.sharedInstance
                 record.stopRecord()
                 (shareScreenButton.cell as! NSButtonCell).attributedTitle = buttonTitle("开始屏幕分享")
             case "UnboundClient":
+                Logger.print("解绑")
                 let record = ScreenRecorder.sharedInstance
                 if record.isRecording() {
                     record.stopRecord()
@@ -213,3 +219,14 @@ class LoginViewController: BaseViewController {
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+

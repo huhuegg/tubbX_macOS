@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         XCGLogger.default.setup(
-            level: .info,
+            level: .debug,
             showLogIdentifier: true,
             showFunctionName: true,
             showThreadName: true,

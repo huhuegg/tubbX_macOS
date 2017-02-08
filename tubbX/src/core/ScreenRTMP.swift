@@ -65,11 +65,20 @@ class ScreenRTMP: NSObject {
         
     }
     
+    var lastPath = ""
     func startPublish(input: AVCaptureScreenInput, url: String) {
         stream.attachScreen(input)
         //stream.attachAudio(DeviceUtil.device(withLocalizedName: audioPopUpButton.itemTitles[audioPopUpButton.indexOfSelectedItem], mediaType: AVMediaTypeAudio))
         connection.addEventListener(Event.RTMP_STATUS, selector:#selector(ScreenRTMP.rtmpStatusHandler(_:)), observer: self)
-        connection.connect(url, arguments: nil)
+        
+        var result = ""
+        if let u = URL(string: url) {
+            lastPath = u.lastPathComponent
+            result = url.replacingOccurrences(of: "/\(lastPath)", with: "")
+        }
+        
+        
+        connection.connect(result, arguments: nil)
     }
     
     func stopPublish() {
@@ -82,7 +91,7 @@ class ScreenRTMP: NSObject {
         if let data = e.data as? ASObject, let code = data["code"] as? String {
             switch code {
             case RTMPConnection.Code.connectSuccess.rawValue:
-                stream.publish("live")
+                stream.publish(lastPath)
             default:
                 break
             }
