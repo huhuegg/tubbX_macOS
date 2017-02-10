@@ -114,6 +114,11 @@ class LoginViewController: BaseViewController {
         shareScreenButton.isHidden = true
     }
     
+    
+    /// 按钮文字样式
+    ///
+    /// - Parameter title: 文字
+    /// - Returns:
     func buttonTitle(_ title: String) -> NSAttributedString {
         let coloredTitle = NSMutableAttributedString(string: title)
         let titleRange = NSRange(location: 0, length: title.characters.count)
@@ -195,6 +200,9 @@ class LoginViewController: BaseViewController {
                 let record = ScreenRecorder.sharedInstance
                 if record.isRecording() {
                     record.stopRecord()
+                    shareScreenButton.isHidden = false
+                    progressIndicator.stopAnimation(self)
+                    (shareScreenButton.cell as! NSButtonCell).attributedTitle = buttonTitle("开始屏幕分享")
                 }
                 shareScreenButton.isHidden = true
                 // 解绑设备成功
@@ -209,6 +217,10 @@ class LoginViewController: BaseViewController {
         }
     }
     
+    
+    /// 展示二维码图片
+    ///
+    /// - Parameter qr: 二维码内容
     fileprivate func showQRImage(_ qr: String) {
         let size = view.frame.size.width - LoginViewController.kViewPadding * 2
         Logger.print("qrCode:\(qr)")
