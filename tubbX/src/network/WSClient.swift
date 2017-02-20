@@ -25,7 +25,8 @@ class WSClient: NSObject, WebSocketDelegate {
     
     override init() {
         super.init()
-        socket = WebSocket(url: URL(string: "ws://192.168.242.253:8021/remote_client")!)
+        //socket = WebSocket(url: URL(string: "ws://192.168.242.253:8021/remote_client")!)
+        socket = WebSocket(url: URL(string: "ws://roomplus.ieggs.info:7021/remote_client")!)
         socket.delegate = self
     }
     

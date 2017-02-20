@@ -7,3 +7,5 @@ github "shogo4405/lf.swift" "master"
 github "daltoniam/Starscream" >= 2.0.3
 
 github "SwiftyJSON/SwiftyJSON"
+
+#carthage update --platform macOS --no user birnary

@@ -16,12 +16,9 @@ class ScreenRTMP: NSObject {
     var connection = RTMPConnection()
     var stream: RTMPStream!
 
-    override init() {
+    init(size:NSSize) {
         super.init()
         stream = RTMPStream(connection: connection)
-        
-        //rtmpStream.attachCamera(DeviceUtil.device(withLocalizedName: cameraPopUpButton.itemTitles[cameraPopUpButton.indexOfSelectedItem], mediaType: AVMediaTypeVideo))
-        
         stream.captureSettings = [
             "fps": 15, // FPS
             "sessionPreset": AVCaptureSessionPreset1280x720, // input video width/height
@@ -29,41 +26,73 @@ class ScreenRTMP: NSObject {
             "continuousExposure": false, //  use camera exposure mode
         ]
         
+        changeVideoSize(size: size)
+        
+    }
+    
+    func changeVideoSize(size:NSSize) {
         stream.videoSettings = [
-            "width": 1280, // video output width
-            "height": 720, // video output height
+            //            "width": 1280, // video output width
+            //            "height": 720, // video output height
+            "width": size.width, // video output width
+            "height": size.height, // video output height
             "bitrate": 80 * 1024, // video output bitrate
             // "dataRateLimits": [160 * 1024 / 8, 1], optional kVTCompressionPropertyKey_DataRateLimits property
             "profileLevel": kVTProfileLevel_H264_Baseline_4_0, // H264 Profile require "import VideoToolbox"
             "maxKeyFrameIntervalDuration": 15, // key frame / sec
         ]
-        
-        // "0" means the same of input
-        //        rtmpStream.recorderSettings = [
-        //            AVMediaTypeAudio: [
-        //                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-        //                AVSampleRateKey: 0,
-        //                AVNumberOfChannelsKey: 0,
-        //                // AVEncoderBitRateKey: 128000,
-        //            ],
-        //            AVMediaTypeVideo: [
-        //                AVVideoCodecKey: AVVideoCodecH264,
-        //                AVVideoHeightKey: 0,
-        //                AVVideoWidthKey: 0,
-        //
-        //                AVVideoCompressionPropertiesKey: [
-        //                    AVVideoMaxKeyFrameIntervalDurationKey: 3,
-        //                    AVVideoAllowFrameReorderingKey: false,
-        //                    AVVideoProfileLevelKey: AVVideoProfileLevelH264BaselineAutoLevel,
-        //                    AVVideoAverageBitRateKey: 0,
-        //                    AVVideoExpectedSourceFrameRateKey: 0,
-        //                    AVVideoAverageNonDroppableFrameRateKey: 0
-        //                ]
-        //
-        //            ],
-        //        ]
-        
     }
+    
+//    override init() {
+//        super.init()
+//        stream = RTMPStream(connection: connection)
+//        
+//        //rtmpStream.attachCamera(DeviceUtil.device(withLocalizedName: cameraPopUpButton.itemTitles[cameraPopUpButton.indexOfSelectedItem], mediaType: AVMediaTypeVideo))
+//        
+//        stream.captureSettings = [
+//            "fps": 15, // FPS
+//            "sessionPreset": AVCaptureSessionPreset1280x720, // input video width/height
+//            "continuousAutofocus": false, // use camera autofocus mode
+//            "continuousExposure": false, //  use camera exposure mode
+//        ]
+//        
+//        stream.videoSettings = [
+////            "width": 1280, // video output width
+////            "height": 720, // video output height
+//            "width": 1162, // video output width
+//            "height": 455, // video output height
+//            "bitrate": 80 * 1024, // video output bitrate
+//            // "dataRateLimits": [160 * 1024 / 8, 1], optional kVTCompressionPropertyKey_DataRateLimits property
+//            "profileLevel": kVTProfileLevel_H264_Baseline_4_0, // H264 Profile require "import VideoToolbox"
+//            "maxKeyFrameIntervalDuration": 15, // key frame / sec
+//        ]
+//        
+//        // "0" means the same of input
+//        //        rtmpStream.recorderSettings = [
+//        //            AVMediaTypeAudio: [
+//        //                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+//        //                AVSampleRateKey: 0,
+//        //                AVNumberOfChannelsKey: 0,
+//        //                // AVEncoderBitRateKey: 128000,
+//        //            ],
+//        //            AVMediaTypeVideo: [
+//        //                AVVideoCodecKey: AVVideoCodecH264,
+//        //                AVVideoHeightKey: 0,
+//        //                AVVideoWidthKey: 0,
+//        //
+//        //                AVVideoCompressionPropertiesKey: [
+//        //                    AVVideoMaxKeyFrameIntervalDurationKey: 3,
+//        //                    AVVideoAllowFrameReorderingKey: false,
+//        //                    AVVideoProfileLevelKey: AVVideoProfileLevelH264BaselineAutoLevel,
+//        //                    AVVideoAverageBitRateKey: 0,
+//        //                    AVVideoExpectedSourceFrameRateKey: 0,
+//        //                    AVVideoAverageNonDroppableFrameRateKey: 0
+//        //                ]
+//        //
+//        //            ],
+//        //        ]
+//        
+//    }
     
     var lastPath = ""
     func startPublish(input: AVCaptureScreenInput, url: String) {
