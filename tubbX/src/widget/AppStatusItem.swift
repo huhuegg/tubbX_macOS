@@ -40,8 +40,19 @@ class AppStatusItem: NSObject {
     }
     
     func showMenu() {
-        let data = MJWindowManager.instance.allWindowList()
+        var data = MJWindowManager.instance.allWindowList()
         var dict:Dictionary<String,Array<WindowInfo>> = Dictionary()
+        
+        
+        let menu = NSMenu()
+        let screenMenuTitle = MJWindowManager.instance.isWatchAppWindow() ? "屏幕":"✓ 屏幕"
+        let screenMenuItem = NSMenuItem(title: screenMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+        screenMenuItem.target = self
+        screenMenuItem.representedObject = data.removeFirst()
+        menu.addItem(screenMenuItem)
+        
+        menu.addItem(NSMenuItem.separator())
+        
         for windowInfo in data {
             if dict[windowInfo.appName] == nil {
                 dict[windowInfo.appName] = Array()
@@ -49,24 +60,18 @@ class AppStatusItem: NSObject {
             dict[windowInfo.appName]?.append(windowInfo)
         }
         
-        let menu = NSMenu()
-        let screenMenuItem = NSMenuItem(title: "屏幕", action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
-        screenMenuItem.target = self
-        screenMenuItem.representedObject = data.first!
-        menu.addItem(screenMenuItem)
-        
         for key in dict.keys {
             if isNeedShow(appName: key) {
                 if let appWindowInfos =  dict[key]  {
-                    let title = appWindowInfos.first!.appName
+                    let title = MJWindowManager.instance.isAppWatched(windowInfo: appWindowInfos.first!) ? "✓ \(appWindowInfos.first!.appName!)":"\(appWindowInfos.first!.appName!)"
 
-                    let menuItem = NSMenuItem(title: title!, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+                    let menuItem = NSMenuItem(title: title, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
                     menuItem.target = self
                     
                     let subMenu = NSMenu()
                     for windowInfo in appWindowInfos {
-                        let title = windowInfo.windowName
-                        let subMenuItem = NSMenuItem(title: title!, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+                        let title = MJWindowManager.instance.isWindowWatched(windowInfo: windowInfo) ? "✓ \(windowInfo.windowName!)":"\(windowInfo.windowName!)"
+                        let subMenuItem = NSMenuItem(title: title, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
                         subMenuItem.target = self
                         
                         subMenu.addItem(subMenuItem)
@@ -78,9 +83,12 @@ class AppStatusItem: NSObject {
             }
         }
         
-
         NSMenu.popUpContextMenu(menu, with: NSApp.currentEvent!, for: self.item.button!)
-        item.menu = menu
+        //使用item.menu方式添加的menu无法动态修改
+        //item.menu = menu
+        
+        //使用popUpMenu方法动态加载menu
+        item.popUpMenu(menu)
     }
     
 //    func createPopOver() {
@@ -127,8 +135,11 @@ extension AppStatusItem {
     @objc fileprivate func menuItemClicked(menuItem: NSMenuItem) {
         print("menuItemClicked")
         if let windowInfo = menuItem.representedObject as? WindowInfo {
-            MJWindowManager.instance.watch(windowInfo: windowInfo)
-            MJWindowManager.instance.activeApplication(appPid: windowInfo.appPid.intValue)
+            DispatchQueue.main.async {
+                //需要先激活应用，然后修改截屏位置为指定的应用窗口位置
+                MJWindowManager.instance.activeApplication(appPid: windowInfo.appPid.intValue)
+                MJWindowManager.instance.watch(windowInfo: windowInfo)
+            }
         }
     }
     

@@ -36,9 +36,9 @@
 		31FFC4A41E03F36C001D8B8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */; };
 		31FFC4AB1E03F49F001D8B8A /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4AA1E03F49F001D8B8A /* ScreenRecorder.swift */; };
 		31FFC4AD1E0401E8001D8B8A /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 31FFC4AC1E0401E8001D8B8A /* Cartfile */; };
+		5EA68E011E5C8DBD00E5B347 /* MJWindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA68E001E5C8DBD00E5B347 /* MJWindowManager.swift */; };
 		5EE81B8C1E5BDC0C00F00796 /* MyPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE81B8A1E5BDC0C00F00796 /* MyPopoverViewController.swift */; };
 		5EE81B8D1E5BDC0C00F00796 /* MyPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EE81B8B1E5BDC0C00F00796 /* MyPopoverViewController.xib */; };
-		5EE81B8F1E5BE1A100F00796 /* MJWindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE81B8E1E5BE1A100F00796 /* MJWindowManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,9 +87,9 @@
 		31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = src/AppDelegate.swift; sourceTree = "<group>"; };
 		31FFC4AA1E03F49F001D8B8A /* ScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
 		31FFC4AC1E0401E8001D8B8A /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		5EA68E001E5C8DBD00E5B347 /* MJWindowManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJWindowManager.swift; sourceTree = "<group>"; };
 		5EE81B8A1E5BDC0C00F00796 /* MyPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPopoverViewController.swift; sourceTree = "<group>"; };
 		5EE81B8B1E5BDC0C00F00796 /* MyPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyPopoverViewController.xib; sourceTree = "<group>"; };
-		5EE81B8E1E5BE1A100F00796 /* MJWindowManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJWindowManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				31A7F25F1E0A66DD00DC53E3 /* AppHelper.swift */,
-				5EE81B8E1E5BE1A100F00796 /* MJWindowManager.swift */,
 				31A7F2581E0A34D500DC53E3 /* Logger.swift */,
 				31A7F25D1E0A4AAF00DC53E3 /* QRCode.swift */,
 			);
@@ -200,6 +199,7 @@
 		31FFC4A51E03F37D001D8B8A /* core */ = {
 			isa = PBXGroup;
 			children = (
+				5EA68E001E5C8DBD00E5B347 /* MJWindowManager.swift */,
 				31FFC4AA1E03F49F001D8B8A /* ScreenRecorder.swift */,
 				31688FD91E0779FE007CDAE8 /* ScreenRTMP.swift */,
 			);
@@ -312,6 +312,7 @@
 				31A7F24D1E0A27EA00DC53E3 /* BaseWindowController.swift in Sources */,
 				31A7F2521E0A282600DC53E3 /* LoginWindowController.swift in Sources */,
 				315AD05D1E48671B000D0DDD /* StopRecordCommand.swift in Sources */,
+				5EA68E011E5C8DBD00E5B347 /* MJWindowManager.swift in Sources */,
 				31A7F2591E0A34D500DC53E3 /* Logger.swift in Sources */,
 				31688FDA1E0779FE007CDAE8 /* ScreenRTMP.swift in Sources */,
 				315AD05B1E48670E000D0DDD /* StartRecordCommand.swift in Sources */,
@@ -321,7 +322,6 @@
 				31A7F22D1E0A20E800DC53E3 /* AppStatusItem.swift in Sources */,
 				31A7F2601E0A66DD00DC53E3 /* AppHelper.swift in Sources */,
 				31A7F25E1E0A4AAF00DC53E3 /* QRCode.swift in Sources */,
-				5EE81B8F1E5BE1A100F00796 /* MJWindowManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
