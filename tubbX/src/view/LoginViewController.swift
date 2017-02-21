@@ -13,6 +13,8 @@ class LoginViewController: BaseViewController {
     
     static var instance: LoginViewController!
     
+    
+    
     static let kViewWidth: CGFloat = 320
     static let kViewHeight: CGFloat = 344
     static let kViewPadding: CGFloat = 24
@@ -53,6 +55,7 @@ class LoginViewController: BaseViewController {
     }
     
     func initView() {
+        
         progressIndicator = NSProgressIndicator()
         progressIndicator.isDisplayedWhenStopped = false
         progressIndicator.style = .spinningStyle

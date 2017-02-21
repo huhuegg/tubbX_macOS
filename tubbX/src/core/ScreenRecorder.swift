@@ -26,22 +26,19 @@ class ScreenRecorder: NSObject {
             input.capturesMouseClicks = true
             input.minFrameDuration = CMTime(seconds: 1.0, preferredTimescale: 20)
             input.scaleFactor = 1
-            var cropRect = CGRect.zero
-            if let screen = NSScreen.screens()?.first {
-                cropRect = screen.frame
-            }
-            //input.cropRect = cropRect
-            //(1570.0, 926.0) point:(157.0, 102.0)
-            let size = NSSize(width: 1162, height: 455)
-            let point = NSPoint(x: 28, y: 67)
-            input.cropRect = converRect(size: size, point: point)
-
-            self.input = input
             
-            rtmp = ScreenRTMP(size: size)
+            self.input = input
+
+            rtmp = ScreenRTMP(size: self.input.cropRect.size)
+            changeWantedRect()
         }
     }
     
+    func changeWantedRect() {
+        print("ScreenRecorder.changeWantedRect")
+        self.input.cropRect = MJWindowManager.instance.watchedRect()
+        rtmp.changeVideoSize(size: self.input.cropRect.size)
+    }
     
     func isRecording() -> Bool {
         return recording
@@ -53,18 +50,7 @@ class ScreenRecorder: NSObject {
     }
     
     func stopRecord() {
-//        if i % 2 > 0 {
-//            let size = NSSize(width: 600, height: 300)
-//            let point = NSPoint(x: 100, y: 50)
-//            input.cropRect = converRect(size: size, point: point)
-//            rtmp.changeVideoSize(size: size)
-//        } else {
-//            let size = NSSize(width: 1162, height: 455)
-//            let point = NSPoint(x: 28, y: 67)
-//            input.cropRect = converRect(size: size, point: point)
-//            rtmp.changeVideoSize(size: size)
-//        }
-//        i = i + 1
+
         rtmp.stopPublish()
         recording = false
     }
