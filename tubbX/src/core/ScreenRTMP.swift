@@ -11,17 +11,23 @@ import lf
 import AVFoundation
 import VideoToolbox
 
+enum VideoQuality {
+    case normal
+    case height
+}
+
 class ScreenRTMP: NSObject {
     
     var connection = RTMPConnection()
     var stream: RTMPStream!
-
+    var quality:VideoQuality = .normal
+    
     init(size:NSSize) {
         super.init()
         stream = RTMPStream(connection: connection)
         stream.captureSettings = [
             "fps": 15, // FPS
-            "sessionPreset": AVCaptureSessionPreset1280x720, // input video width/height
+            "sessionPreset": AVCaptureSessionPresetHigh, // input video width/height
             "continuousAutofocus": false, // use camera autofocus mode
             "continuousExposure": false, //  use camera exposure mode
         ]
@@ -30,15 +36,43 @@ class ScreenRTMP: NSObject {
         
     }
     
+    private func bitrate() -> Int {
+        switch self.quality {
+        case .normal:
+            return 80 * 1024
+        case .height:
+            return 8 * 80 * 1024
+        }
+    }
+    
+    private func profileLevel() -> CFString {
+        switch self.quality {
+        case .normal:
+            return kVTProfileLevel_H264_Baseline_4_0
+        case .height:
+            return kVTProfileLevel_H264_Main_AutoLevel
+        }
+    }
+    
+    func changeQuality(quality:VideoQuality) {
+        print("修改视频质量为:\(quality == .normal ? "标准":"高质量")")
+        self.quality = quality
+        let width = stream.videoSettings["width"] as! CGFloat
+        let height = stream.videoSettings["height"] as! CGFloat
+        let size = NSSize(width: width, height: height)
+        changeVideoSize(size: size)
+    }
+    
     func changeVideoSize(size:NSSize) {
+        
         stream.videoSettings = [
             //            "width": 1280, // video output width
             //            "height": 720, // video output height
             "width": size.width, // video output width
             "height": size.height, // video output height
-            "bitrate": 80 * 1024, // video output bitrate
+            "bitrate": bitrate(), // video output bitrate
             // "dataRateLimits": [160 * 1024 / 8, 1], optional kVTCompressionPropertyKey_DataRateLimits property
-            "profileLevel": kVTProfileLevel_H264_Baseline_4_0, // H264 Profile require "import VideoToolbox"
+            "profileLevel": profileLevel(), // H264 Profile require "import VideoToolbox"
             "maxKeyFrameIntervalDuration": 15, // key frame / sec
         ]
     }

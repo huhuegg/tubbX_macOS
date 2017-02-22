@@ -25,6 +25,8 @@ class AppStatusItem: NSObject {
     func createStatusItem() {
         item = NSStatusBar.system().statusItem(withLength: 20)
         let image = NSImage(named: "ic_statusBar")
+        image?.size = NSSize(width: 20, height: 20)
+        
         item.image = image
 //        image?.isTemplate = true
 //        item.highlightMode = true
@@ -45,14 +47,36 @@ class AppStatusItem: NSObject {
         
         
         let menu = NSMenu()
-        let screenMenuTitle = MJWindowManager.instance.isWatchAppWindow() ? "屏幕":"✓ 屏幕"
+        
+        let qualityMenuItem = NSMenuItem(title: "视频质量", action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+        qualityMenuItem.target = self
+        
+        let qualitySubMenu = NSMenu()
+        let qualityNormalSubMenuTitle = ScreenRecorder.sharedInstance.rtmp.quality == .normal ? "✓ 标准":"标准"
+        let qualityNormalSubMenuItem = NSMenuItem(title: qualityNormalSubMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+        qualityNormalSubMenuItem.target = self
+        qualityNormalSubMenuItem.representedObject = "QualityNormal"
+        qualitySubMenu.addItem(qualityNormalSubMenuItem)
+        
+        let qualityHeightSubMenuTitle = ScreenRecorder.sharedInstance.rtmp.quality == .height ? "✓ 高质量":"高质量"
+        let qualityHeightSubMenuItem = NSMenuItem(title: qualityHeightSubMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+        qualityHeightSubMenuItem.target = self
+        qualityHeightSubMenuItem.representedObject = "QualityHeight"
+        qualitySubMenu.addItem(qualityHeightSubMenuItem)
+
+        qualityMenuItem.submenu = qualitySubMenu
+        menu.addItem(qualityMenuItem)
+        
+        
+        menu.addItem(NSMenuItem.separator())
+        
+        let screenMenuTitle = MJWindowManager.instance.isWatchAppWindow() ? "完整屏幕":"✓ 完整屏幕"
         let screenMenuItem = NSMenuItem(title: screenMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
         screenMenuItem.target = self
         screenMenuItem.representedObject = data.removeFirst()
         menu.addItem(screenMenuItem)
         
-        menu.addItem(NSMenuItem.separator())
-        
+
         for windowInfo in data {
             if dict[windowInfo.appName] == nil {
                 dict[windowInfo.appName] = Array()
@@ -135,10 +159,15 @@ extension AppStatusItem {
     @objc fileprivate func menuItemClicked(menuItem: NSMenuItem) {
         print("menuItemClicked")
         if let windowInfo = menuItem.representedObject as? WindowInfo {
-            DispatchQueue.main.async {
-                //需要先激活应用，然后修改截屏位置为指定的应用窗口位置
-                MJWindowManager.instance.activeApplication(appPid: windowInfo.appPid.intValue)
-                MJWindowManager.instance.watch(windowInfo: windowInfo)
+            print("先激活应用，然后修改截屏位置为指定的应用窗口位置")
+            //需要先激活应用，然后修改截屏位置为指定的应用窗口位置
+            MJWindowManager.instance.activeApplicationAndWathchWindow(windowInfo: windowInfo)
+            
+        } else if let quality = menuItem.representedObject as? String {
+            if quality == "QualityNormal" {
+                ScreenRecorder.sharedInstance.rtmp.changeQuality(quality: .normal)
+            } else if quality == "QualityHeight" {
+                ScreenRecorder.sharedInstance.rtmp.changeQuality(quality: .height)
             }
         }
     }

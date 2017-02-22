@@ -114,12 +114,19 @@ class MJWindowManager: NSObject {
         return NSZeroRect
     }
     
-    func activeApplication(appPid:Int) {
-        if appPid > 1 {
-            if let app = NSRunningApplication(processIdentifier: pid_t(appPid)) {
+    func activeApplicationAndWathchWindow(windowInfo:WindowInfo) {
+        if windowInfo.appPid.intValue > 1 {
+            if let app = NSRunningApplication(processIdentifier: pid_t(windowInfo.appPid.intValue)) {
+                print("在运行中的应用列表中查询到了需要激活的应用")
                 if !app.isActive {
+                    print("isNotActive")
                     app.activate(options: NSApplicationActivationOptions.activateAllWindows)
+                    if app.isHidden {
+                        print("isHidden")
+                        app.unhide()
+                    }
                 }
+                self.watch(windowInfo: windowInfo)
             }
         }
     }
@@ -127,7 +134,7 @@ class MJWindowManager: NSObject {
 
 extension MJWindowManager {
     @objc fileprivate func updateWindowList() {
-        print("updateWindowList")
+        //print("updateWindowList")
         var arr:Array<WindowInfo> = Array()
         var screenRect = CGRect.zero
         if let screen = NSScreen.screens()?.first {
@@ -204,8 +211,16 @@ extension MJWindowManager {
     
     @objc fileprivate func applicationChanged() {
         print("applicationChanged")
-        //appid NSWorkspace.shared().frontmostApplication?.processIdentifier
-        //appname NSWorkspace.shared().frontmostApplication?.localizedName
+//        if let frontApp = NSWorkspace.shared().frontmostApplication {
+//            if let _ = watchWindow {
+//                if Int(frontApp.processIdentifier) == self.watchWindow!.appPid.intValue {
+//                    ScreenRecorder.sharedInstance.changeWantedRect()
+//                }
+//            } else {
+//                ScreenRecorder.sharedInstance.changeWantedRect()
+//            }
+//            
+//        }
     }
 }
 

@@ -44,8 +44,8 @@ extension MyPopoverViewController:NSTableViewDataSource,NSTableViewDelegate {
         if index >= 0 && index < data.count {
             print("\(data[tableView.selectedRow].windowName)")
             let windowInfo = data[index]
-            MJWindowManager.instance.watch(windowInfo: windowInfo)
-            MJWindowManager.instance.activeApplication(appPid: windowInfo.appPid.intValue)
+//            MJWindowManager.instance.watch(windowInfo: windowInfo)
+            MJWindowManager.instance.activeApplicationAndWathchWindow(windowInfo: windowInfo)
 
         }
     }
