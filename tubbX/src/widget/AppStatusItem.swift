@@ -64,6 +64,12 @@ class AppStatusItem: NSObject {
         qualityHeightSubMenuItem.representedObject = "QualityHeight"
         qualitySubMenu.addItem(qualityHeightSubMenuItem)
 
+        let qualityHeightMovieSubMenuTitle = ScreenRecorder.sharedInstance.rtmp.quality == .height ? "✓ 高质量视频":"高质量视频"
+        let qualityHeightMovieSubMenuItem = NSMenuItem(title: qualityHeightMovieSubMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+        qualityHeightMovieSubMenuItem.target = self
+        qualityHeightMovieSubMenuItem.representedObject = "QualityHeightMovie"
+        qualitySubMenu.addItem(qualityHeightMovieSubMenuItem)
+        
         qualityMenuItem.submenu = qualitySubMenu
         menu.addItem(qualityMenuItem)
         
@@ -134,7 +140,7 @@ class AppStatusItem: NSObject {
 //    }
     
     func isNeedShow(appName:String) -> Bool {
-        let whiteList = ["Xcode","Safari","Google Chrome","Keynote"]
+        let whiteList = ["Xcode","Safari","Google Chrome","Keynote","QuickTime Player"]
         for i in whiteList {
             if appName == i {
                 return true
@@ -168,6 +174,8 @@ extension AppStatusItem {
                 ScreenRecorder.sharedInstance.rtmp.changeQuality(quality: .normal)
             } else if quality == "QualityHeight" {
                 ScreenRecorder.sharedInstance.rtmp.changeQuality(quality: .height)
+            } else if quality == "QualityHeightMovie" {
+                ScreenRecorder.sharedInstance.rtmp.changeQuality(quality: .movie)
             }
         }
     }

@@ -14,6 +14,15 @@ import VideoToolbox
 enum VideoQuality {
     case normal
     case height
+    case movie
+    
+    func desc() -> String {
+        switch self {
+        case .normal: return "标准"
+        case .height: return "高质量"
+        case .movie: return "高质量视频"
+        }
+    }
 }
 
 class ScreenRTMP: NSObject {
@@ -35,12 +44,24 @@ class ScreenRTMP: NSObject {
         changeVideoSize(size: size)
         
     }
+    private func fps() -> Int {
+        switch self.quality {
+        case .normal:
+            return 15
+        case .height:
+            return 15
+        case .movie:
+            return 30
+        }
+    }
     
     private func bitrate() -> Int {
         switch self.quality {
         case .normal:
             return 80 * 1024
         case .height:
+            return 8 * 80 * 1024
+        case .movie:
             return 8 * 80 * 1024
         }
     }
@@ -51,11 +72,13 @@ class ScreenRTMP: NSObject {
             return kVTProfileLevel_H264_Baseline_4_0
         case .height:
             return kVTProfileLevel_H264_Main_AutoLevel
+        case .movie:
+            return kVTProfileLevel_H264_High_AutoLevel
         }
     }
     
     func changeQuality(quality:VideoQuality) {
-        print("修改视频质量为:\(quality == .normal ? "标准":"高质量")")
+        print("修改视频质量为:\(quality.desc)")
         self.quality = quality
         let width = stream.videoSettings["width"] as! CGFloat
         let height = stream.videoSettings["height"] as! CGFloat

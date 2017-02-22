@@ -168,9 +168,8 @@ extension MJWindowManager {
                     let windowMemoryUsage = info[kCGWindowMemoryUsage as String] as! NSNumber
                     
                     let windowInfo = WindowInfo(appPid: appPid, appName: appName, windowNumber: windowNumber, windowName: windowName, windowBounds: windowBounds, windowIsOnScreen: windowIsOnScreen, windowLayer: windowLayer, windowAlpha: windowAlpha, windowStoreType: windowStoreType, windowSharingState: windowSharingState, windowMemoryUsage: windowMemoryUsage)
-                    //print("windowInfo:\(windowInfo)")
                     arr.append(windowInfo)
-                    
+                    //print("app:\(windowInfo.appName) window:\(windowInfo.windowName)")
                 }
                 
             }
