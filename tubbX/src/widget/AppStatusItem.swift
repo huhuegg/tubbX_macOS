@@ -48,6 +48,25 @@ class AppStatusItem: NSObject {
         
         let menu = NSMenu()
         
+        //显示器
+        if let screens = NSScreen.screens() {
+            let screenMenuItem = NSMenuItem(title: "显示器", action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+            screenMenuItem.target = self
+            
+            let screenSubMenu = NSMenu()
+            for (index,_) in screens.enumerated() {
+                let screenSubMenuTitle = ScreenRecorder.sharedInstance.lastScreenIndex() == index ? "✓ 显示器\(index + 1)":"显示器\(index + 1)"
+                let screenSubMenuItem = NSMenuItem(title: screenSubMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+                screenSubMenuItem.target = self
+                screenSubMenuItem.representedObject = NSNumber(integerLiteral: index)
+                screenSubMenu.addItem(screenSubMenuItem)
+            }
+            screenMenuItem.submenu = screenSubMenu
+            menu.addItem(screenMenuItem)
+            menu.addItem(NSMenuItem.separator())
+        }
+        
+        //视频质量
         let qualityMenuItem = NSMenuItem(title: "视频质量", action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
         qualityMenuItem.target = self
         
@@ -76,6 +95,7 @@ class AppStatusItem: NSObject {
         
         menu.addItem(NSMenuItem.separator())
         
+        //录制的屏幕和窗口
         let screenMenuTitle = MJWindowManager.instance.isWatchAppWindow() ? "完整屏幕":"✓ 完整屏幕"
         let screenMenuItem = NSMenuItem(title: screenMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
         screenMenuItem.target = self
@@ -177,6 +197,9 @@ extension AppStatusItem {
             } else if quality == "QualityHeightMovie" {
                 ScreenRecorder.sharedInstance.rtmp.changeQuality(quality: .movie)
             }
+        } else if let screenIndex = menuItem.representedObject as? NSNumber {
+            print("select screen index:\(screenIndex.intValue)")
+            ScreenRecorder.sharedInstance.changeScreenIndex(idx: screenIndex.intValue)
         }
     }
     

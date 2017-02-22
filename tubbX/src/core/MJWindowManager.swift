@@ -101,7 +101,10 @@ class MJWindowManager: NSObject {
     }
     
     func watchedRect() -> NSRect {
-        if let screen = NSScreen.screens()?.first {
+        if var screens = NSScreen.screens() {
+            print("watchedRect screen:\(ScreenRecorder.sharedInstance.lastScreenIndex())")
+            let screen = screens.remove(at: ScreenRecorder.sharedInstance.lastScreenIndex())
+            dump(screen.frame)
             if let _ = watchWindow {
                 //供截取部分屏幕时，坐标系需要转换
                 let rect = CGRect(x: watchWindow!.windowBounds.origin.x, y: screen.frame.size.height - watchWindow!.windowBounds.size.height - watchWindow!.windowBounds.origin.y, width: watchWindow!.windowBounds.size.width, height: watchWindow!.windowBounds.size.height)
@@ -111,6 +114,7 @@ class MJWindowManager: NSObject {
                 return screen.frame
             }
         }
+        
         return NSZeroRect
     }
     

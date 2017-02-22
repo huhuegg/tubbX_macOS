@@ -17,11 +17,37 @@ class ScreenRecorder: NSObject {
     var recording = false
     var rtmp:ScreenRTMP!
     var input: AVCaptureScreenInput!
-    
+    private var recordScreenIndex:Int = 0
     var i:Int = 1
     
     override init() {
         super.init()
+        
+        //start test
+//        print("---------- main: \(CGMainDisplayID())")
+//
+//        let maxDisplays: UInt32 = 16
+//        var onlineDisplays = [CGDirectDisplayID](repeating: 0, count: Int(maxDisplays))
+//        var displayCount: UInt32 = 0
+//        
+//        let dErr = CGGetOnlineDisplayList(maxDisplays, &onlineDisplays, &displayCount)
+//        
+//        print("dspyCnt is \(displayCount)")
+//        
+//        for currentDisplay in onlineDisplays[0..<Int(displayCount)] {
+//            print("currentDisplay is \(currentDisplay)")
+//            print("CGDisplayPixelsHigh(currentDisplay) is \(CGDisplayPixelsHigh(currentDisplay))")
+//            print("CGDisplayPixelsWide(currentDisplay) is \(CGDisplayPixelsWide(currentDisplay))")
+//        }
+        
+        if let screens = NSScreen.screens() {
+            for screen in screens {
+                let displayID = screen.deviceDescription["NSScreenNumber"]
+                
+            }
+        }
+        //end test
+        
         if let input = AVCaptureScreenInput(displayID: CGMainDisplayID()) {
             input.capturesMouseClicks = true
             input.minFrameDuration = CMTime(seconds: 1.0, preferredTimescale: 20)
@@ -30,8 +56,17 @@ class ScreenRecorder: NSObject {
             self.input = input
 
             rtmp = ScreenRTMP(size: self.input.cropRect.size)
-            changeWantedRect()
         }
+    }
+    
+    func lastScreenIndex() -> Int {
+        return recordScreenIndex
+    }
+    
+    func changeScreenIndex(idx:Int) {
+        recordScreenIndex = idx
+        
+        changeWantedRect()
     }
     
     func changeWantedRect() {

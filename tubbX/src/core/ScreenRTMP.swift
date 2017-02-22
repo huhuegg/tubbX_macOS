@@ -31,6 +31,7 @@ class ScreenRTMP: NSObject {
     var stream: RTMPStream!
     var quality:VideoQuality = .normal
     
+    
     init(size:NSSize) {
         super.init()
         stream = RTMPStream(connection: connection)

@@ -141,11 +141,11 @@ class LoginViewController: BaseViewController {
         if record.isRecording() {
             let record = ScreenRecorder.sharedInstance
             record.stopRecord()
-//            Logger.print("结束屏幕分享")
-//            shareScreenButton.isHidden = true
-//            progressIndicator.startAnimation(self)
-//            let command = StopRecordCommand(kIdentifier).makeCommand()
-//            wsClient.sendMessage(message: command)
+            Logger.print("结束屏幕分享")
+            shareScreenButton.isHidden = true
+            progressIndicator.startAnimation(self)
+            let command = StopRecordCommand(kIdentifier).makeCommand()
+            wsClient.sendMessage(message: command)
         } else {
             Logger.print("开始屏幕分享")
             shareScreenButton.isHidden = true
