@@ -1,8 +1,7 @@
 
 github "SnapKit/SnapKit" ~> 3.0.2
 
-github "shogo4405/lf.swift" "master"
-
+github "shogo4405/lf.swift" >= 0.5.11
 
 github "daltoniam/Starscream" >= 2.0.3
 

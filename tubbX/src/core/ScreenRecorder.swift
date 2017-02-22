@@ -17,36 +17,11 @@ class ScreenRecorder: NSObject {
     var recording = false
     var rtmp:ScreenRTMP!
     var input: AVCaptureScreenInput!
-    private var recordScreenIndex:Int = 0
+    private var recordDisplayID:CGDirectDisplayID = CGMainDisplayID()
     var i:Int = 1
     
     override init() {
         super.init()
-        
-        //start test
-//        print("---------- main: \(CGMainDisplayID())")
-//
-//        let maxDisplays: UInt32 = 16
-//        var onlineDisplays = [CGDirectDisplayID](repeating: 0, count: Int(maxDisplays))
-//        var displayCount: UInt32 = 0
-//        
-//        let dErr = CGGetOnlineDisplayList(maxDisplays, &onlineDisplays, &displayCount)
-//        
-//        print("dspyCnt is \(displayCount)")
-//        
-//        for currentDisplay in onlineDisplays[0..<Int(displayCount)] {
-//            print("currentDisplay is \(currentDisplay)")
-//            print("CGDisplayPixelsHigh(currentDisplay) is \(CGDisplayPixelsHigh(currentDisplay))")
-//            print("CGDisplayPixelsWide(currentDisplay) is \(CGDisplayPixelsWide(currentDisplay))")
-//        }
-        
-        if let screens = NSScreen.screens() {
-            for screen in screens {
-                let displayID = screen.deviceDescription["NSScreenNumber"]
-                
-            }
-        }
-        //end test
         
         if let input = AVCaptureScreenInput(displayID: CGMainDisplayID()) {
             input.capturesMouseClicks = true
@@ -59,12 +34,12 @@ class ScreenRecorder: NSObject {
         }
     }
     
-    func lastScreenIndex() -> Int {
-        return recordScreenIndex
+    func lastDisplayID() -> CGDirectDisplayID {
+        return recordDisplayID
     }
     
-    func changeScreenIndex(idx:Int) {
-        recordScreenIndex = idx
+    func changeScreen(displayID:CGDirectDisplayID) {
+        recordDisplayID = displayID
         
         changeWantedRect()
     }
@@ -93,6 +68,22 @@ class ScreenRecorder: NSObject {
 }
 
 extension ScreenRecorder {
+    func debugPrintDisplayInfos() {
+        let maxDisplays: UInt32 = 16
+        var onlineDisplays = [CGDirectDisplayID](repeating: 0, count: Int(maxDisplays))
+        var displayCount: UInt32 = 0
+        
+        let dErr = CGGetOnlineDisplayList(maxDisplays, &onlineDisplays, &displayCount)
+        
+        print("displayCount: \(displayCount)")
+        
+        for currentDisplay in onlineDisplays[0..<Int(displayCount)] {
+            print("currentDisplay is \(currentDisplay)")
+            print("CGDisplayPixelsHigh(currentDisplay) is \(CGDisplayPixelsHigh(currentDisplay))")
+            print("CGDisplayPixelsWide(currentDisplay) is \(CGDisplayPixelsWide(currentDisplay))")
+        }
+    }
+    
     func screenSize() -> NSSize {
         let screens = NSScreen.screens()
         for screen in screens! {

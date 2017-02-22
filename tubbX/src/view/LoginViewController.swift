@@ -138,6 +138,9 @@ class LoginViewController: BaseViewController {
     
     func startShareScreen() {
         let record = ScreenRecorder.sharedInstance
+        //FIXME:- 临时修复--此处需要单独嗲用changeWantedRect
+        record.changeWantedRect()
+        
         if record.isRecording() {
             let record = ScreenRecorder.sharedInstance
             record.stopRecord()
@@ -186,7 +189,7 @@ class LoginViewController: BaseViewController {
                 shareScreenButton.isHidden = false
             case "StartRecord":
                 // 开始屏幕分享
-                Logger.print("开始屏幕分享")
+                Logger.print("开始屏幕分享1")
                 progressIndicator.stopAnimation(self)
                 shareScreenButton.isHidden = false
                 (shareScreenButton.cell as! NSButtonCell).attributedTitle = buttonTitle("结束屏幕分享")

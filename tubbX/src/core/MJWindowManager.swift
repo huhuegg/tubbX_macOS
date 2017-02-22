@@ -102,17 +102,27 @@ class MJWindowManager: NSObject {
     
     func watchedRect() -> NSRect {
         if var screens = NSScreen.screens() {
-            print("watchedRect screen:\(ScreenRecorder.sharedInstance.lastScreenIndex())")
-            let screen = screens.remove(at: ScreenRecorder.sharedInstance.lastScreenIndex())
-            dump(screen.frame)
-            if let _ = watchWindow {
-                //供截取部分屏幕时，坐标系需要转换
-                let rect = CGRect(x: watchWindow!.windowBounds.origin.x, y: screen.frame.size.height - watchWindow!.windowBounds.size.height - watchWindow!.windowBounds.origin.y, width: watchWindow!.windowBounds.size.width, height: watchWindow!.windowBounds.size.height)
-                return rect
-                
-            } else {
-                return screen.frame
+            var watchScreen:NSScreen?
+            for screen in screens {
+                let displayID = screen.deviceDescription["NSScreenNumber"] as! CGDirectDisplayID
+                if displayID == ScreenRecorder.sharedInstance.lastDisplayID() {
+                    watchScreen = screen
+                }
             }
+
+            if let _ = watchScreen {
+                if let _ = watchWindow {
+                    //供截取部分屏幕时，坐标系需要转换
+                    let rect = CGRect(x: watchWindow!.windowBounds.origin.x, y: watchScreen!.frame.size.height - watchWindow!.windowBounds.size.height - watchWindow!.windowBounds.origin.y, width: watchWindow!.windowBounds.size.width, height: watchWindow!.windowBounds.size.height)
+                    return rect
+                    
+                } else {
+                    return watchScreen!.frame
+                }
+            } else {
+                print("watchScreen is nil")
+            }
+            
         }
         
         return NSZeroRect
@@ -135,15 +145,27 @@ class MJWindowManager: NSObject {
         }
     }
 }
-
+/*
+ 2017-02-22 23:19:29.120 [Info] [AACEncoder.swift:81] inSourceFormat > Optional(__C.AudioStreamBasicDescription(mSampleRate: 44100.0, mFormatID: 1819304813, mFormatFlags: 41, mBytesPerPacket: 4, mFramesPerPacket: 1, mBytesPerFrame: 4, mChannelsPerFrame: 2, mBitsPerChannel: 32, mReserved: 0))
+ 
+ 2017-02-22 23:20:16.982 [Info] [AACEncoder.swift:81] inSourceFormat > Optional(__C.AudioStreamBasicDescription(mSampleRate: 44100.0, mFormatID: 1819304813, mFormatFlags: 41, mBytesPerPacket: 4, mFramesPerPacket: 1, mBytesPerFrame: 4, mChannelsPerFrame: 2, mBitsPerChannel: 32, mReserved: 0))
+ **/
 extension MJWindowManager {
     @objc fileprivate func updateWindowList() {
         //print("updateWindowList")
         var arr:Array<WindowInfo> = Array()
         var screenRect = CGRect.zero
-        if let screen = NSScreen.screens()?.first {
-            screenRect = screen.frame
+        guard let screens = NSScreen.screens() else {
+            return
         }
+        for screen in screens {
+            let displayID = screen.deviceDescription["NSScreenNumber"] as! CGDirectDisplayID
+            if displayID == ScreenRecorder.sharedInstance.lastDisplayID() {
+                screenRect = screen.frame
+            }
+
+        }
+
         let screenInfo = WindowInfo(appPid: -1, appName: "Screen", windowNumber: -1, windowName: "Screen", windowBounds: screenRect, windowIsOnScreen: -1, windowLayer: -1, windowAlpha: -1, windowStoreType: -1, windowSharingState: -1, windowMemoryUsage: -1)
         arr.append(screenInfo)
         

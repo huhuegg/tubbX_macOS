@@ -42,11 +42,34 @@ class AppStatusItem: NSObject {
     }
     
     func showMenu() {
+        print("showMenu")
         var data = MJWindowManager.instance.allWindowList()
         var dict:Dictionary<String,Array<WindowInfo>> = Dictionary()
         
         
         let menu = NSMenu()
+        
+        //声音
+        let voiceMenuItem = NSMenuItem(title: "声音", action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+        voiceMenuItem.target = self
+        
+        let voiceSubMenu = NSMenu()
+        let voiceEnableSubMenuTitle = ScreenRecorder.sharedInstance.rtmp.audioMuted == false ? "✓ 开启":"开启"
+        let voiceEnableSubMenuItem = NSMenuItem(title: voiceEnableSubMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+        voiceEnableSubMenuItem.target = self
+        voiceEnableSubMenuItem.representedObject = "voiceMenuItem"
+        voiceSubMenu.addItem(voiceEnableSubMenuItem)
+
+        //FIXME:- AACEncoder在静音时会崩溃，待处理
+//        let voiceMutedSubMenuTitle = ScreenRecorder.sharedInstance.rtmp.audioMuted == true ? "✓ 关闭":"关闭"
+//        let voiceMutedSubMenuItem = NSMenuItem(title: voiceMutedSubMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+//        voiceMutedSubMenuItem.target = self
+//        voiceMutedSubMenuItem.representedObject = "VoiceMuted"
+//        voiceSubMenu.addItem(voiceMutedSubMenuItem)
+        
+        voiceMenuItem.submenu = voiceSubMenu
+        menu.addItem(voiceMenuItem)
+        menu.addItem(NSMenuItem.separator())
         
         //显示器
         if let screens = NSScreen.screens() {
@@ -54,11 +77,20 @@ class AppStatusItem: NSObject {
             screenMenuItem.target = self
             
             let screenSubMenu = NSMenu()
-            for (index,_) in screens.enumerated() {
-                let screenSubMenuTitle = ScreenRecorder.sharedInstance.lastScreenIndex() == index ? "✓ 显示器\(index + 1)":"显示器\(index + 1)"
+            for (index,screen) in screens.enumerated() {
+                var screenSubMenuTitle = ""
+                let displayID = screen.deviceDescription["NSScreenNumber"] as! CGDirectDisplayID
+                if displayID == ScreenRecorder.sharedInstance.lastDisplayID() {
+                    screenSubMenuTitle = "✓ "
+                }
+                
+                screenSubMenuTitle += "显示器\(index + 1)"
+                if displayID == CGMainDisplayID() {
+                    screenSubMenuTitle += " (主屏幕)"
+                }
                 let screenSubMenuItem = NSMenuItem(title: screenSubMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
                 screenSubMenuItem.target = self
-                screenSubMenuItem.representedObject = NSNumber(integerLiteral: index)
+                screenSubMenuItem.representedObject = displayID
                 screenSubMenu.addItem(screenSubMenuItem)
             }
             screenMenuItem.submenu = screenSubMenu
@@ -83,7 +115,7 @@ class AppStatusItem: NSObject {
         qualityHeightSubMenuItem.representedObject = "QualityHeight"
         qualitySubMenu.addItem(qualityHeightSubMenuItem)
 
-        let qualityHeightMovieSubMenuTitle = ScreenRecorder.sharedInstance.rtmp.quality == .height ? "✓ 高质量视频":"高质量视频"
+        let qualityHeightMovieSubMenuTitle = ScreenRecorder.sharedInstance.rtmp.quality == .movie ? "✓ 高质量视频":"高质量视频"
         let qualityHeightMovieSubMenuItem = NSMenuItem(title: qualityHeightMovieSubMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
         qualityHeightMovieSubMenuItem.target = self
         qualityHeightMovieSubMenuItem.representedObject = "QualityHeightMovie"
@@ -133,11 +165,8 @@ class AppStatusItem: NSObject {
             }
         }
         
-        NSMenu.popUpContextMenu(menu, with: NSApp.currentEvent!, for: self.item.button!)
-        //使用item.menu方式添加的menu无法动态修改
-        //item.menu = menu
-        
         //使用popUpMenu方法动态加载menu
+        print("popUpMenu")
         item.popUpMenu(menu)
     }
     
@@ -189,26 +218,27 @@ extension AppStatusItem {
             //需要先激活应用，然后修改截屏位置为指定的应用窗口位置
             MJWindowManager.instance.activeApplicationAndWathchWindow(windowInfo: windowInfo)
             
-        } else if let quality = menuItem.representedObject as? String {
-            if quality == "QualityNormal" {
+        } else if let str = menuItem.representedObject as? String {
+            if str == "VoiceEnable" {
+                ScreenRecorder.sharedInstance.rtmp.changeAudio(mute: false)
+            } else if str == "VoiceMuted" {
+                ScreenRecorder.sharedInstance.rtmp.changeAudio(mute: true)
+            } else if str == "QualityNormal" {
                 ScreenRecorder.sharedInstance.rtmp.changeQuality(quality: .normal)
-            } else if quality == "QualityHeight" {
+            } else if str == "QualityHeight" {
                 ScreenRecorder.sharedInstance.rtmp.changeQuality(quality: .height)
-            } else if quality == "QualityHeightMovie" {
+            } else if str == "QualityHeightMovie" {
                 ScreenRecorder.sharedInstance.rtmp.changeQuality(quality: .movie)
             }
-        } else if let screenIndex = menuItem.representedObject as? NSNumber {
-            print("select screen index:\(screenIndex.intValue)")
-            ScreenRecorder.sharedInstance.changeScreenIndex(idx: screenIndex.intValue)
+        } else if let screenID = menuItem.representedObject as? CGDirectDisplayID {
+            if screenID == CGMainDisplayID() {
+                print("select mainScreen :\(screenID)")
+            } else {
+                print("select screen:\(screenID)")
+            }
+            ScreenRecorder.sharedInstance.changeScreen(displayID: screenID)
         }
     }
-    
-//    @objc fileprivate func showPopover() {
-//        if let statusBarButton = item.button {
-//            popOver?.show(relativeTo: statusBarButton.bounds, of: statusBarButton, preferredEdge: NSRectEdge.maxY)
-//        }
-//
-//    }
 }
 
 
