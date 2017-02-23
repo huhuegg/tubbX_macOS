@@ -201,7 +201,10 @@ class AppStatusItem: NSObject {
         }
         recordRectMenuItem.submenu = recordRectSubMenu
         menu.addItem(recordRectMenuItem)
+        menu.addItem(NSMenuItem.separator())
         
+        //退出
+        menu.addItem(withTitle: "退出", action: #selector(NSApp.terminate(_:)), keyEquivalent: "q")
         
         //使用popUpMenu方法动态加载menu
         print("popUpMenu")
