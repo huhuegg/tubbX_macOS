@@ -30,28 +30,28 @@ class LoginViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.networkResp(n:)), name: Notification.Name(rawValue: "NetworkResp"), object: nil)
-        
-        
-        wsClient.start()
-        
-        LoginViewController.instance = self
-        Logger.print("LoginViewController viewDidLoad")
-        initView()
+//        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.networkResp(n:)), name: Notification.Name(rawValue: "NetworkResp"), object: nil)
+//        
+//        
+//        wsClient.start()
+//        
+//        LoginViewController.instance = self
+//        Logger.print("LoginViewController viewDidLoad")
+//        initView()
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
-        progressIndicator.startAnimation(self)
-        let command = RegisterCommand(kIdentifier).makeCommand()
-        wsClient.sendMessage(message: command)
+//        progressIndicator.startAnimation(self)
+//        let command = RegisterCommand(kIdentifier).makeCommand()
+//        wsClient.sendMessage(message: command)
         
     }
     
     override func viewDidDisappear() {
         super.viewDidDisappear()
-        wsClient.stop()
-        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "NetworkResp"), object: nil)
+//        wsClient.stop()
+//        NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: "NetworkResp"), object: nil)
     }
     
     func initView() {

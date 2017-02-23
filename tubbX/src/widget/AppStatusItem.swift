@@ -12,7 +12,9 @@ fileprivate let appStatusItem:AppStatusItem = AppStatusItem()
 class AppStatusItem: NSObject {
 
     var item: NSStatusItem!
-//    var popOver:NSPopover?
+    var popOver:NSPopover?
+    var popOverViewController:MyPopoverViewController?
+    var whiteList = ["Xcode","Safari","Google Chrome","Keynote","QuickTime Player"]
     
     static var instance: AppStatusItem {
         return appStatusItem
@@ -20,6 +22,7 @@ class AppStatusItem: NSObject {
     
     override init() {
         super.init()
+        popOverViewController = MyPopoverViewController(nibName: "MyPopoverViewController", bundle: nil)
     }
     
     func createStatusItem() {
@@ -38,37 +41,34 @@ class AppStatusItem: NSObject {
         }
         
         
-        //createPopOver()
+        createQRCodePopOver()
     }
     
     func showMenu() {
         print("showMenu")
         var data = MJWindowManager.instance.allWindowList()
         var dict:Dictionary<String,Array<WindowInfo>> = Dictionary()
-        
+        for windowInfo in data {
+//            if windowInfo.appName == "Screen" {
+//                continue
+//            }
+            if windowInfo.windowBounds.size.height < 100 || windowInfo.windowBounds.size.width < 100 {
+                continue
+            }
+            if dict[windowInfo.appName] == nil {
+                dict[windowInfo.appName] = Array()
+            }
+            dict[windowInfo.appName]?.append(windowInfo)
+        }
+
         
         let menu = NSMenu()
-        
-        //声音
-        let voiceMenuItem = NSMenuItem(title: "声音", action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
-        voiceMenuItem.target = self
-        
-        let voiceSubMenu = NSMenu()
-        let voiceEnableSubMenuTitle = ScreenRecorder.sharedInstance.rtmp.audioMuted == false ? "✓ 开启":"开启"
-        let voiceEnableSubMenuItem = NSMenuItem(title: voiceEnableSubMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
-        voiceEnableSubMenuItem.target = self
-        voiceEnableSubMenuItem.representedObject = "voiceMenuItem"
-        voiceSubMenu.addItem(voiceEnableSubMenuItem)
-
-        //FIXME:- AACEncoder在静音时会崩溃，待处理
-//        let voiceMutedSubMenuTitle = ScreenRecorder.sharedInstance.rtmp.audioMuted == true ? "✓ 关闭":"关闭"
-//        let voiceMutedSubMenuItem = NSMenuItem(title: voiceMutedSubMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
-//        voiceMutedSubMenuItem.target = self
-//        voiceMutedSubMenuItem.representedObject = "VoiceMuted"
-//        voiceSubMenu.addItem(voiceMutedSubMenuItem)
-        
-        voiceMenuItem.submenu = voiceSubMenu
-        menu.addItem(voiceMenuItem)
+        //录制
+        let recordMenuTitle = ScreenRecorder.sharedInstance.isRecording() ? "结束录制":"开始录制"
+        let recordMenuItem = NSMenuItem(title: recordMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+        recordMenuItem.target = self
+        recordMenuItem.representedObject = ScreenRecorder.sharedInstance.isRecording() ? "StopRecord":"StartRecord"
+        menu.addItem(recordMenuItem)
         menu.addItem(NSMenuItem.separator())
         
         //显示器
@@ -97,6 +97,45 @@ class AppStatusItem: NSObject {
             menu.addItem(screenMenuItem)
             menu.addItem(NSMenuItem.separator())
         }
+        
+        //可录制应用列表
+        let appListMenuItem = NSMenuItem(title: "可录制应用列表", action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+        appListMenuItem.target = self
+        let appListSubMenu = NSMenu()
+        for key in dict.keys {
+            let appTitle = isNeedShow(appName: key) ? "✓ ":""
+            let appMenuItem = NSMenuItem(title: appTitle + key, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+            appMenuItem.target = self
+            appMenuItem.representedObject = dict[key]
+            appListSubMenu.addItem(appMenuItem)
+        }
+        appListMenuItem.submenu = appListSubMenu
+        menu.addItem(appListMenuItem)
+        menu.addItem(NSMenuItem.separator())
+
+        //声音
+        let voiceMenuItem = NSMenuItem(title: "声音", action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+        voiceMenuItem.target = self
+        
+        let voiceSubMenu = NSMenu()
+        let voiceEnableSubMenuTitle = ScreenRecorder.sharedInstance.rtmp.audioMuted == false ? "✓ 开启":"开启"
+        let voiceEnableSubMenuItem = NSMenuItem(title: voiceEnableSubMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+        voiceEnableSubMenuItem.target = self
+        voiceEnableSubMenuItem.representedObject = "voiceMenuItem"
+        voiceSubMenu.addItem(voiceEnableSubMenuItem)
+
+        //FIXME:- AACEncoder在静音时会崩溃，待处理
+//        let voiceMutedSubMenuTitle = ScreenRecorder.sharedInstance.rtmp.audioMuted == true ? "✓ 关闭":"关闭"
+//        let voiceMutedSubMenuItem = NSMenuItem(title: voiceMutedSubMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+//        voiceMutedSubMenuItem.target = self
+//        voiceMutedSubMenuItem.representedObject = "VoiceMuted"
+//        voiceSubMenu.addItem(voiceMutedSubMenuItem)
+        
+        voiceMenuItem.submenu = voiceSubMenu
+        menu.addItem(voiceMenuItem)
+        menu.addItem(NSMenuItem.separator())
+        
+        
         
         //视频质量
         let qualityMenuItem = NSMenuItem(title: "视频质量", action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
@@ -127,20 +166,16 @@ class AppStatusItem: NSObject {
         
         menu.addItem(NSMenuItem.separator())
         
-        //录制的屏幕和窗口
+        //录制区域
+        let recordRectMenuItem = NSMenuItem(title: "录制区域", action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+        recordRectMenuItem.target = self
+        let recordRectSubMenu = NSMenu()
+
         let screenMenuTitle = MJWindowManager.instance.isWatchAppWindow() ? "完整屏幕":"✓ 完整屏幕"
         let screenMenuItem = NSMenuItem(title: screenMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
         screenMenuItem.target = self
         screenMenuItem.representedObject = data.removeFirst()
-        menu.addItem(screenMenuItem)
-        
-
-        for windowInfo in data {
-            if dict[windowInfo.appName] == nil {
-                dict[windowInfo.appName] = Array()
-            }
-            dict[windowInfo.appName]?.append(windowInfo)
-        }
+        recordRectSubMenu.addItem(screenMenuItem)
         
         for key in dict.keys {
             if isNeedShow(appName: key) {
@@ -160,36 +195,30 @@ class AppStatusItem: NSObject {
                         subMenuItem.representedObject = windowInfo
                     }
                     menuItem.submenu = subMenu
-                    menu.addItem(menuItem)
+                    recordRectSubMenu.addItem(menuItem)
                 }
             }
         }
+        recordRectMenuItem.submenu = recordRectSubMenu
+        menu.addItem(recordRectMenuItem)
+        
         
         //使用popUpMenu方法动态加载menu
         print("popUpMenu")
         item.popUpMenu(menu)
     }
     
-//    func createPopOver() {
-//        if popOver == nil {
-//            popOver = NSPopover()
-//            popOver!.behavior = .applicationDefined
-//            popOver!.appearance = NSAppearance()
-//            popOver!.contentViewController = MyPopoverViewController(nibName: "MyPopoverViewController", bundle: nil)
-//            
-//            self.item.target = self
-//            self.item.button?.action = #selector(showPopover)
-//            
-//            NSEvent.addGlobalMonitorForEvents(matching: NSEventMask.leftMouseDown) { (event) in
-//                if self.popOver!.isShown {
-//                    self.popOver!.close()
-//                }
-//            }
-//        }
-//    }
+    func createQRCodePopOver() {
+        if popOver == nil {
+            popOver = NSPopover()
+            popOver!.behavior = .transient
+            popOver!.appearance = NSAppearance()
+            popOver!.contentViewController = popOverViewController
+
+        }
+    }
     
     func isNeedShow(appName:String) -> Bool {
-        let whiteList = ["Xcode","Safari","Google Chrome","Keynote","QuickTime Player"]
         for i in whiteList {
             if appName == i {
                 return true
@@ -213,13 +242,30 @@ extension AppStatusItem {
 
     @objc fileprivate func menuItemClicked(menuItem: NSMenuItem) {
         print("menuItemClicked")
-        if let windowInfo = menuItem.representedObject as? WindowInfo {
+        if let appWindowInfos = menuItem.representedObject as? Array<WindowInfo> {
+            guard let windowInfo = appWindowInfos.first else {
+                return
+            }
+            guard let appName = windowInfo.appName else {
+                return
+            }
+            
+            if let index = whiteList.index(of: appName) {
+                whiteList.remove(at: index)
+            } else {
+                whiteList.append(appName)
+            }
+        } else if let windowInfo = menuItem.representedObject as? WindowInfo {
             print("先激活应用，然后修改截屏位置为指定的应用窗口位置")
             //需要先激活应用，然后修改截屏位置为指定的应用窗口位置
             MJWindowManager.instance.activeApplicationAndWathchWindow(windowInfo: windowInfo)
             
         } else if let str = menuItem.representedObject as? String {
-            if str == "VoiceEnable" {
+            if str == "StartRecord" {
+                showPopover()
+            } else if str == "StopRecord" {
+                popOverViewController?.stop()
+            } else if str == "VoiceEnable" {
                 ScreenRecorder.sharedInstance.rtmp.changeAudio(mute: false)
             } else if str == "VoiceMuted" {
                 ScreenRecorder.sharedInstance.rtmp.changeAudio(mute: true)
@@ -239,6 +285,14 @@ extension AppStatusItem {
             ScreenRecorder.sharedInstance.changeScreen(displayID: screenID)
         }
     }
+    
+    @objc fileprivate func showPopover() {
+        if let statusBarButton = item.button {
+            popOver?.show(relativeTo: statusBarButton.bounds, of: statusBarButton, preferredEdge: NSRectEdge.maxY)
+        }
+        
+    }
+
 }
 
 

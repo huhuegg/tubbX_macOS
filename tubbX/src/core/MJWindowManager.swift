@@ -166,8 +166,8 @@ extension MJWindowManager {
 
         }
 
-        let screenInfo = WindowInfo(appPid: -1, appName: "Screen", windowNumber: -1, windowName: "Screen", windowBounds: screenRect, windowIsOnScreen: -1, windowLayer: -1, windowAlpha: -1, windowStoreType: -1, windowSharingState: -1, windowMemoryUsage: -1)
-        arr.append(screenInfo)
+//        let screenInfo = WindowInfo(appPid: -1, appName: "Screen", windowNumber: -1, windowName: "Screen", windowBounds: screenRect, windowIsOnScreen: -1, windowLayer: -1, windowAlpha: -1, windowStoreType: -1, windowSharingState: -1, windowMemoryUsage: -1)
+//        arr.append(screenInfo)
         
         if let windowListInfo = CGWindowListCopyWindowInfo(listOptions(), kCGNullWindowID) as? NSArray {
             for tmpWindowInfo in windowListInfo {
