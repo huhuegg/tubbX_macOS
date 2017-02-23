@@ -30,19 +30,34 @@ class ScreenRTMP: NSObject {
     var connection = RTMPConnection()
     var stream: RTMPStream!
     var quality:VideoQuality = .normal
-    
+    var audioMuted:Bool = false
     
     init(size:NSSize) {
         super.init()
         stream = RTMPStream(connection: connection)
         stream.captureSettings = [
-            "fps": 15, // FPS
+            "fps": fps(), // FPS
             "sessionPreset": AVCaptureSessionPresetHigh, // input video width/height
             "continuousAutofocus": false, // use camera autofocus mode
             "continuousExposure": false, //  use camera exposure mode
         ]
         
-        changeVideoSize(size: size)
+        stream.audioSettings = [
+            "muted": false, // mute audio
+            "bitrate": 32 * 1024,
+            "sampleRate": 44100,
+        ]
+        
+        stream.videoSettings = [
+            //            "width": 1280, // video output width
+            //            "height": 720, // video output height
+            "width": size.width, // video output width
+            "height": size.height, // video output height
+            "bitrate": 80 * 1024, // video output bitrate
+            // "dataRateLimits": [160 * 1024 / 8, 1], optional kVTCompressionPropertyKey_DataRateLimits property
+            "profileLevel": kVTProfileLevel_H264_Baseline_4_0, // H264 Profile require "import VideoToolbox"
+            "maxKeyFrameIntervalDuration": 15, // key frame / sec
+        ]
         
     }
     private func fps() -> Int {
@@ -63,7 +78,7 @@ class ScreenRTMP: NSObject {
         case .height:
             return 8 * 80 * 1024
         case .movie:
-            return 8 * 80 * 1024
+            return 10 * 80 * 1024
         }
     }
     
@@ -78,8 +93,17 @@ class ScreenRTMP: NSObject {
         }
     }
     
+    func changeAudio(mute:Bool) {
+        self.audioMuted = mute
+        stream.audioSettings = [
+            "muted": mute, // mute audio
+            "bitrate": 32 * 1024,
+            "sampleRate": 44100,
+        ]
+    }
+    
     func changeQuality(quality:VideoQuality) {
-        print("修改视频质量为:\(quality.desc)")
+        print("修改视频质量为:\(quality.desc())")
         self.quality = quality
         let width = stream.videoSettings["width"] as! CGFloat
         let height = stream.videoSettings["height"] as! CGFloat
@@ -97,7 +121,7 @@ class ScreenRTMP: NSObject {
             "bitrate": bitrate(), // video output bitrate
             // "dataRateLimits": [160 * 1024 / 8, 1], optional kVTCompressionPropertyKey_DataRateLimits property
             "profileLevel": profileLevel(), // H264 Profile require "import VideoToolbox"
-            "maxKeyFrameIntervalDuration": 15, // key frame / sec
+            "maxKeyFrameIntervalDuration": fps(), // key frame / sec
         ]
     }
     
@@ -155,7 +179,10 @@ class ScreenRTMP: NSObject {
     var lastPath = ""
     func startPublish(input: AVCaptureScreenInput, url: String) {
         stream.attachScreen(input)
-        //stream.attachAudio(DeviceUtil.device(withLocalizedName: audioPopUpButton.itemTitles[audioPopUpButton.indexOfSelectedItem], mediaType: AVMediaTypeAudio))
+        
+        stream.attachAudio(AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeAudio), automaticallyConfiguresApplicationAudioSession: true)
+        
+        
         connection.addEventListener(Event.RTMP_STATUS, selector:#selector(ScreenRTMP.rtmpStatusHandler(_:)), observer: self)
         
         var result = ""
