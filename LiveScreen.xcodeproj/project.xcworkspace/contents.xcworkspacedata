@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:tubbX.xcodeproj">
+      location = "self:/Users/huhuegg/Desktop/Source/tubbX_macOS/LiveScreen.xcodeproj">
    </FileRef>
 </Workspace>

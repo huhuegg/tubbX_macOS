@@ -8,6 +8,9 @@
 
 import Cocoa
 
+protocol MyPopoverViewControllerProtocol {
+    func bindDeviceCompleted()
+}
 class MyPopoverViewController: NSViewController {
     let kIdentifier = UUID().uuidString
     
@@ -23,6 +26,8 @@ class MyPopoverViewController: NSViewController {
     
     var progressIndicator: NSProgressIndicator!
     var publishUrl: String = ""
+    
+    var delegate:MyPopoverViewControllerProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -162,6 +167,10 @@ class MyPopoverViewController: NSViewController {
         progressIndicator.startAnimation(self)
         let command = StopRecordCommand(kIdentifier).makeCommand()
         wsClient.sendMessage(message: command)
+        
+        let image = NSImage(named: "ic_statusBar")
+        image?.size = NSSize(width: 20, height: 20)
+        AppStatusItem.instance.item.button?.image = image
     }
     
     func start() {
@@ -200,23 +209,33 @@ class MyPopoverViewController: NSViewController {
                 Logger.print("绑定设备成功")
                 publishUrl = userInfo["publishUrl"] as! String
                 qrImageView.isHidden = true
-                shareScreenButton.isHidden = false
+                //
+                shareScreenButton.isHidden = true
+                startShareScreen()
+                delegate?.bindDeviceCompleted()
             case "StartRecord":
                 // 开始屏幕分享
                 Logger.print("开始屏幕分享1")
                 progressIndicator.stopAnimation(self)
-                shareScreenButton.isHidden = false
-                (shareScreenButton.cell as! NSButtonCell).attributedTitle = buttonTitle("结束屏幕分享")
+//                shareScreenButton.isHidden = false
+                //(shareScreenButton.cell as! NSButtonCell).attributedTitle = buttonTitle("结束屏幕分享")
                 let record = ScreenRecorder.sharedInstance
                 record.startRecord(publishUrl: publishUrl)
+                
+                let image = NSImage(named: "ic_recording")
+                image?.size = NSSize(width: 20, height: 20)
+                AppStatusItem.instance.item.button?.image = image
+                
+                
             case "StopRecord":
                 // 结束屏幕分享
                 Logger.print("结束屏幕分享")
-                shareScreenButton.isHidden = false
+//                shareScreenButton.isHidden = false
                 progressIndicator.stopAnimation(self)
                 let record = ScreenRecorder.sharedInstance
                 record.stopRecord()
-                (shareScreenButton.cell as! NSButtonCell).attributedTitle = buttonTitle("开始屏幕分享")
+                
+                //(shareScreenButton.cell as! NSButtonCell).attributedTitle = buttonTitle("开始屏幕分享")
             case "UnboundClient":
                 Logger.print("解绑")
                 let record = ScreenRecorder.sharedInstance

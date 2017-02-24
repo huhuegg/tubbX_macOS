@@ -16,6 +16,8 @@ class ScreenRecorder: NSObject {
 
     var recording = false
     var rtmp:ScreenRTMP!
+//    var local:ScreenLocal!
+    
     var input: AVCaptureScreenInput!
     private var recordDisplayID:CGDirectDisplayID = CGMainDisplayID()
     var i:Int = 1
@@ -25,12 +27,13 @@ class ScreenRecorder: NSObject {
         
         if let input = AVCaptureScreenInput(displayID: CGMainDisplayID()) {
             input.capturesMouseClicks = true
-            input.minFrameDuration = CMTime(seconds: 1.0, preferredTimescale: 20)
+            input.minFrameDuration = CMTime(seconds: 1.0, preferredTimescale: 30)
             input.scaleFactor = 1
             
             self.input = input
 
             rtmp = ScreenRTMP(size: self.input.cropRect.size)
+//            local = ScreenLocal(size: self.input.cropRect.size)
         }
     }
     
@@ -57,6 +60,7 @@ class ScreenRecorder: NSObject {
     func startRecord(publishUrl: String) {
         recording = true
         rtmp.startPublish(input: input, url: publishUrl)
+//        local.startPublish(input: input)
     }
     
     func stopRecord() {

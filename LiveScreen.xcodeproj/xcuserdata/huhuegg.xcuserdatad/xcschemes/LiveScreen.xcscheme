@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "31FFC48F1E03F2E7001D8B8A"
-               BuildableName = "tubbX.app"
-               BlueprintName = "tubbX"
-               ReferencedContainer = "container:tubbX.xcodeproj">
+               BuildableName = "LiveScreen.app"
+               BlueprintName = "LiveScreen"
+               ReferencedContainer = "container:LiveScreen.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "31FFC48F1E03F2E7001D8B8A"
-            BuildableName = "tubbX.app"
-            BlueprintName = "tubbX"
-            ReferencedContainer = "container:tubbX.xcodeproj">
+            BuildableName = "LiveScreen.app"
+            BlueprintName = "LiveScreen"
+            ReferencedContainer = "container:LiveScreen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "31FFC48F1E03F2E7001D8B8A"
-            BuildableName = "tubbX.app"
-            BlueprintName = "tubbX"
-            ReferencedContainer = "container:tubbX.xcodeproj">
+            BuildableName = "LiveScreen.app"
+            BlueprintName = "LiveScreen"
+            ReferencedContainer = "container:LiveScreen.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "31FFC48F1E03F2E7001D8B8A"
-            BuildableName = "tubbX.app"
-            BlueprintName = "tubbX"
-            ReferencedContainer = "container:tubbX.xcodeproj">
+            BuildableName = "LiveScreen.app"
+            BlueprintName = "LiveScreen"
+            ReferencedContainer = "container:LiveScreen.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

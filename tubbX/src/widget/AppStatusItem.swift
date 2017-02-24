@@ -23,10 +23,11 @@ class AppStatusItem: NSObject {
     override init() {
         super.init()
         popOverViewController = MyPopoverViewController(nibName: "MyPopoverViewController", bundle: nil)
+        popOverViewController?.delegate = self
     }
     
     func createStatusItem() {
-        item = NSStatusBar.system().statusItem(withLength: 20)
+        item = NSStatusBar.system().statusItem(withLength: 36)
         let image = NSImage(named: "ic_statusBar")
         image?.size = NSSize(width: 20, height: 20)
         
@@ -49,9 +50,9 @@ class AppStatusItem: NSObject {
         var data = MJWindowManager.instance.allWindowList()
         var dict:Dictionary<String,Array<WindowInfo>> = Dictionary()
         for windowInfo in data {
-//            if windowInfo.appName == "Screen" {
-//                continue
-//            }
+            if windowInfo.appName == "Screen" {
+                continue
+            }
             if windowInfo.windowBounds.size.height < 100 || windowInfo.windowBounds.size.width < 100 {
                 continue
             }
@@ -64,7 +65,7 @@ class AppStatusItem: NSObject {
         
         let menu = NSMenu()
         //录制
-        let recordMenuTitle = ScreenRecorder.sharedInstance.isRecording() ? "结束录制":"开始录制"
+        let recordMenuTitle = ScreenRecorder.sharedInstance.isRecording() ? "结束直播推流":"开始直播推流"
         let recordMenuItem = NSMenuItem(title: recordMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
         recordMenuItem.target = self
         recordMenuItem.representedObject = ScreenRecorder.sharedInstance.isRecording() ? "StopRecord":"StartRecord"
@@ -73,7 +74,7 @@ class AppStatusItem: NSObject {
         
         //显示器
         if let screens = NSScreen.screens() {
-            let screenMenuItem = NSMenuItem(title: "显示器", action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+            let screenMenuItem = NSMenuItem(title: "屏幕", action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
             screenMenuItem.target = self
             
             let screenSubMenu = NSMenu()
@@ -87,11 +88,12 @@ class AppStatusItem: NSObject {
                 screenSubMenuTitle += "显示器\(index + 1)"
                 if displayID == CGMainDisplayID() {
                     screenSubMenuTitle += " (主屏幕)"
+                    let screenSubMenuItem = NSMenuItem(title: screenSubMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+                    screenSubMenuItem.target = self
+                    screenSubMenuItem.representedObject = displayID
+                    screenSubMenu.addItem(screenSubMenuItem)
                 }
-                let screenSubMenuItem = NSMenuItem(title: screenSubMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
-                screenSubMenuItem.target = self
-                screenSubMenuItem.representedObject = displayID
-                screenSubMenu.addItem(screenSubMenuItem)
+                
             }
             screenMenuItem.submenu = screenSubMenu
             menu.addItem(screenMenuItem)
@@ -260,8 +262,14 @@ extension AppStatusItem {
             }
         } else if let windowInfo = menuItem.representedObject as? WindowInfo {
             print("先激活应用，然后修改截屏位置为指定的应用窗口位置")
+            dump(windowInfo)
             //需要先激活应用，然后修改截屏位置为指定的应用窗口位置
-            MJWindowManager.instance.activeApplicationAndWathchWindow(windowInfo: windowInfo)
+            if windowInfo.appPid.intValue == -1 {
+                MJWindowManager.instance.activeApplicationAndWathchWindow(windowInfo: nil)
+            } else {
+                MJWindowManager.instance.activeApplicationAndWathchWindow(windowInfo: windowInfo)
+            }
+            
             
         } else if let str = menuItem.representedObject as? String {
             if str == "StartRecord" {
@@ -298,5 +306,9 @@ extension AppStatusItem {
 
 }
 
-
+extension AppStatusItem:MyPopoverViewControllerProtocol {
+    func bindDeviceCompleted() {
+        popOver?.close()
+    }
+}
 

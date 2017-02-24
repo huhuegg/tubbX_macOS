@@ -51,7 +51,6 @@ class MJWindowManager: NSObject {
     fileprivate var watchWindow:WindowInfo?
     
     fileprivate func listOptions() -> CGWindowListOption {
-        //return CGWindowListOption.optionOnScreenOnly
         let options = CGWindowListOption(arrayLiteral: CGWindowListOption.excludeDesktopElements, CGWindowListOption.optionOnScreenOnly)
         return options
     }
@@ -95,7 +94,7 @@ class MJWindowManager: NSObject {
         return false
     }
     
-    func watch(windowInfo:WindowInfo) {
+    func watch(windowInfo:WindowInfo?) {
         self.watchWindow = windowInfo
         ScreenRecorder.sharedInstance.changeWantedRect()
     }
@@ -128,28 +127,26 @@ class MJWindowManager: NSObject {
         return NSZeroRect
     }
     
-    func activeApplicationAndWathchWindow(windowInfo:WindowInfo) {
-        if windowInfo.appPid.intValue > 1 {
-            if let app = NSRunningApplication(processIdentifier: pid_t(windowInfo.appPid.intValue)) {
-                print("在运行中的应用列表中查询到了需要激活的应用")
-                if !app.isActive {
-                    print("isNotActive")
-                    app.activate(options: NSApplicationActivationOptions.activateAllWindows)
-                    if app.isHidden {
-                        print("isHidden")
-                        app.unhide()
+    func activeApplicationAndWathchWindow(windowInfo:WindowInfo?) {
+        if let _ = windowInfo {
+            if windowInfo!.appPid.intValue > 1 {
+                if let app = NSRunningApplication(processIdentifier: pid_t(windowInfo!.appPid.intValue)) {
+                    print("在运行中的应用列表中查询到了需要激活的应用")
+                    if !app.isActive {
+                        print("isNotActive")
+                        app.activate(options: NSApplicationActivationOptions.activateAllWindows)
+                        if app.isHidden {
+                            print("isHidden")
+                            app.unhide()
+                        }
                     }
                 }
-                self.watch(windowInfo: windowInfo)
             }
         }
+        self.watch(windowInfo: windowInfo)
     }
 }
-/*
- 2017-02-22 23:19:29.120 [Info] [AACEncoder.swift:81] inSourceFormat > Optional(__C.AudioStreamBasicDescription(mSampleRate: 44100.0, mFormatID: 1819304813, mFormatFlags: 41, mBytesPerPacket: 4, mFramesPerPacket: 1, mBytesPerFrame: 4, mChannelsPerFrame: 2, mBitsPerChannel: 32, mReserved: 0))
- 
- 2017-02-22 23:20:16.982 [Info] [AACEncoder.swift:81] inSourceFormat > Optional(__C.AudioStreamBasicDescription(mSampleRate: 44100.0, mFormatID: 1819304813, mFormatFlags: 41, mBytesPerPacket: 4, mFramesPerPacket: 1, mBytesPerFrame: 4, mChannelsPerFrame: 2, mBitsPerChannel: 32, mReserved: 0))
- **/
+
 extension MJWindowManager {
     @objc fileprivate func updateWindowList() {
         //print("updateWindowList")
@@ -166,8 +163,8 @@ extension MJWindowManager {
 
         }
 
-//        let screenInfo = WindowInfo(appPid: -1, appName: "Screen", windowNumber: -1, windowName: "Screen", windowBounds: screenRect, windowIsOnScreen: -1, windowLayer: -1, windowAlpha: -1, windowStoreType: -1, windowSharingState: -1, windowMemoryUsage: -1)
-//        arr.append(screenInfo)
+        let screenInfo = WindowInfo(appPid: -1, appName: "Screen", windowNumber: -1, windowName: "Screen", windowBounds: screenRect, windowIsOnScreen: -1, windowLayer: -1, windowAlpha: -1, windowStoreType: -1, windowSharingState: -1, windowMemoryUsage: -1)
+        arr.append(screenInfo)
         
         if let windowListInfo = CGWindowListCopyWindowInfo(listOptions(), kCGNullWindowID) as? NSArray {
             for tmpWindowInfo in windowListInfo {
