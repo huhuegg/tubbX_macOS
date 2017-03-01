@@ -13,6 +13,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        
+        AppEvent.instance.addEvent()
+        
         AppStatusItem.instance.createStatusItem()
     }
 
@@ -20,14 +23,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
     
-    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        if flag {
-            return false
-        } else {
-            LoginWindowController.instance.showWindow(self)
-        }
-        return true
-    }
+//    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+//        if flag {
+//            return false
+//        } else {
+//            LoginWindowController.instance.showWindow(self)
+//        }
+//        return true
+//    }
 
 }
-

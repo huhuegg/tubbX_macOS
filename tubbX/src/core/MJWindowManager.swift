@@ -7,7 +7,8 @@
 //
 
 import Cocoa
-
+import AppKit
+import ApplicationServices
 
 class WindowInfo:NSObject {
     var appPid:NSNumber!
@@ -145,11 +146,82 @@ class MJWindowManager: NSObject {
         }
         self.watch(windowInfo: windowInfo)
     }
+    
+    func findApp(appPid:Int) -> NSRunningApplication? {
+        let pid = pid_t(appPid)
+        return NSRunningApplication.init(processIdentifier: pid)
+    }
+    
+    func appWindows(appPid:Int) -> [AXUIElement]? {
+
+        
+        let pid = pid_t(appPid)
+        let appRef:AXUIElement = AXUIElementCreateApplication(pid)
+        let windowList : UnsafeMutablePointer<AnyObject?> = UnsafeMutablePointer<AnyObject?>.allocate(capacity: 1)
+
+        AXUIElementCopyAttributeValue(appRef, "AXWindows" as CFString, windowList)
+        if let list = windowList as? [AXUIElement] {
+            print("window count:\(list.count)")
+            return list
+        } else {
+            print("not found any window")
+            return nil
+        }
+//        
+//        return windowList.memory as! [AXUIElement]
+//        
+//        if (AXUIElementCopyAttributeValues(appRef, "AXWindows" as CFString, 0, 100, windowList) == 0) {
+//            print("app window count:\(CFArrayGetCount(windows))")
+//        }
+//        
+////        let error = AXUIElementCopyAttributeValue(appElement, kAXWindowAttribute as CFString, windowsRef)
+////        print("app window count:\(CFArrayGetCount(windowsRef))")
+////        if CFArrayGetCount(windowsRef) > 0 {
+////            
+////        }
+////        if let _ = windowsRef {
+////            let windowsArr:CFMutableArray = CFArrayCreateMutableCopy(kCFAllocatorDefault, 0, windowsRef);
+////        }
+////        
+////        CFArrayRef _windows;
+////        if (AXUIElementCopyAttributeValues(app, kAXWindowsAttribute, 0, 100, &_windows) == kAXErrorSuccess) {
+////            return _windows;
+////        }
+////        
+////        
+////        AXUIElementRef appRef = AXUIElementCreateApplication(appPID);
+////        CFArrayRef windowsArrRef = [AccessibilityWrapper windowsInApp:appRef];
+////        if (!windowsArrRef || CFArrayGetCount(windowsArrRef) == 0) continue;
+////        CFMutableArrayRef windowsArr = CFArrayCreateMutableCopy(kCFAllocatorDefault, 0, windowsArrRef);
+////        NSArray *windowSnapshots = [[snapshot apps] objectForKey:appName];
+////        // Check windows
+////        for (NSInteger i = 0; i < CFArrayGetCount(windowsArr); i++) {
+////            SlateLogger(@" Checking Window: %@", [AccessibilityWrapper getTitle:CFArrayGetValueAtIndex(windowsArr, i)]);
+
+    }
+    
+    func find(windowNumber:Int) -> WindowInfo? {
+        for info in windowList {
+            if info.windowNumber.intValue == windowNumber {
+                return info
+            }
+        }
+        return nil
+    }
+    
+    func isPointInWindow(point:NSPoint, windowNumber:Int, catchRect:NSRect) -> WindowInfo? {
+        if let windowInfo = find(windowNumber: windowNumber) {
+            if (point.x >= catchRect.origin.x && point.x <= catchRect.origin.x + catchRect.size.width) && (point.y >= catchRect.origin.y && point.y <= catchRect.origin.y + catchRect.size.height) {
+                return windowInfo
+            }
+        }
+        return nil
+    }
 }
 
 extension MJWindowManager {
     @objc fileprivate func updateWindowList() {
-        //print("updateWindowList")
+        print("updateWindowList")
         var arr:Array<WindowInfo> = Array()
         var screenRect = CGRect.zero
         guard let screens = NSScreen.screens() else {
@@ -160,7 +232,6 @@ extension MJWindowManager {
             if displayID == ScreenRecorder.sharedInstance.lastDisplayID() {
                 screenRect = screen.frame
             }
-
         }
 
         let screenInfo = WindowInfo(appPid: -1, appName: "Screen", windowNumber: -1, windowName: "Screen", windowBounds: screenRect, windowIsOnScreen: -1, windowLayer: -1, windowAlpha: -1, windowStoreType: -1, windowSharingState: -1, windowMemoryUsage: -1)
@@ -192,7 +263,7 @@ extension MJWindowManager {
                     
                     let windowInfo = WindowInfo(appPid: appPid, appName: appName, windowNumber: windowNumber, windowName: windowName, windowBounds: windowBounds, windowIsOnScreen: windowIsOnScreen, windowLayer: windowLayer, windowAlpha: windowAlpha, windowStoreType: windowStoreType, windowSharingState: windowSharingState, windowMemoryUsage: windowMemoryUsage)
                     arr.append(windowInfo)
-                    //print("app:\(windowInfo.appName) window:\(windowInfo.windowName)")
+                    //print("app:\(windowInfo.appName!) window:\(windowInfo.windowName!) windowNumber:\(windowNumber)")
                 }
                 
             }
@@ -244,6 +315,7 @@ extension MJWindowManager {
 //            
 //        }
     }
+    
+    
 }
-
 

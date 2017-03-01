@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import SnapKit
 
 protocol MyPopoverViewControllerProtocol {
     func bindDeviceCompleted()

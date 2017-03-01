@@ -16,12 +16,17 @@ class AppStatusItem: NSObject {
     var popOverViewController:MyPopoverViewController?
     var whiteList = ["Xcode","Safari","Google Chrome","Keynote","QuickTime Player"]
     
+    var panel:NSPanel?
+    
+    var isLayoutWindowShowing = false
+    
     static var instance: AppStatusItem {
         return appStatusItem
     }
     
     override init() {
         super.init()
+        panel = NSApp.keyWindow as? NSPanel
         popOverViewController = MyPopoverViewController(nibName: "MyPopoverViewController", bundle: nil)
         popOverViewController?.delegate = self
     }
@@ -64,6 +69,14 @@ class AppStatusItem: NSObject {
 
         
         let menu = NSMenu()
+        //布局
+        let layoutMenuTitle = isLayoutWindowShowing == true ? "关闭布局窗口":"打开布局窗口"
+        let layoutMenuItem = NSMenuItem(title: layoutMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+        layoutMenuItem.target = self
+        layoutMenuItem.representedObject = isLayoutWindowShowing == true ? "CloseLayoutWindow":"ShowLayoutWindow"
+        menu.addItem(layoutMenuItem)
+        menu.addItem(NSMenuItem.separator())
+        
         //录制
         let recordMenuTitle = ScreenRecorder.sharedInstance.isRecording() ? "结束直播推流":"开始直播推流"
         let recordMenuItem = NSMenuItem(title: recordMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
@@ -239,6 +252,8 @@ extension AppStatusItem {
         
         if event.type == NSEventType.rightMouseUp {
             print("Right click")
+//            //测试中
+//            showLocationWindow()
         } else {
             print("Left click")
             showMenu()
@@ -272,7 +287,11 @@ extension AppStatusItem {
             
             
         } else if let str = menuItem.representedObject as? String {
-            if str == "StartRecord" {
+            if str == "CloseLayoutWindow" {
+                closeLayoutWindow()
+            } else if str == "ShowLayoutWindow" {
+                showLayoutWindow()
+            } else if str == "StartRecord" {
                 showPopover()
             } else if str == "StopRecord" {
                 popOverViewController?.stop()
@@ -312,3 +331,42 @@ extension AppStatusItem:MyPopoverViewControllerProtocol {
     }
 }
 
+extension AppStatusItem {
+    fileprivate func showLayoutWindow() {
+        print("showLayoutWindow")
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        if let layoutWindowController = storyboard.instantiateController(withIdentifier: "LayoutWindowController") as? LayoutWindowController {
+            panel = layoutWindowController.window as? NSPanel
+            layoutWindowController.initView(isVisible: true)
+            isLayoutWindowShowing = true
+        }
+        
+
+    }
+    
+    fileprivate func closeLayoutWindow() {
+        print("closeLayoutWindow")
+        panel?.close()
+//        NSApp.keyWindow?.setIsVisible(false)
+        isLayoutWindowShowing = false
+    }
+
+//    //显示定位辅助窗口
+//    fileprivate func showLocationWindow() {
+//        let rect = NSMakeRect(0, 0, 600, 500) //左下角为0，0
+//        
+//        panel = NSPanel(contentRect: rect, styleMask: NSWindowStyleMask.hudWindow, backing: NSBackingStoreType.nonretained, defer: false)
+//        panel?.orderFront(self)
+//        panel?.level = Int(CGWindowLevelKey.maximumWindow.rawValue)
+//        
+//        let subViewRect = NSMakeRect(10, 20, 400, 300)
+//        let subview = NSView(frame: subViewRect)
+//        subview.wantsLayer = true
+//        let subviewColor = NSColor(calibratedWhite: 0.5, alpha: 0.5)
+//        
+//        subview.layer?.backgroundColor = subviewColor.cgColor
+//        panel?.contentView?.addSubview(subview)
+//
+//        NSApp.runModal(for: panel!)
+//    }
+}

@@ -22,21 +22,25 @@
 		316890331E07954E007CDAE8 /* XCGLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3168902F1E07954E007CDAE8 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		31A7F22D1E0A20E800DC53E3 /* AppStatusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F22C1E0A20E800DC53E3 /* AppStatusItem.swift */; };
 		31A7F2301E0A275100DC53E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31A7F22E1E0A275100DC53E3 /* Main.storyboard */; };
-		31A7F24D1E0A27EA00DC53E3 /* BaseWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F24C1E0A27EA00DC53E3 /* BaseWindowController.swift */; };
-		31A7F24F1E0A280100DC53E3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F24E1E0A280100DC53E3 /* BaseViewController.swift */; };
-		31A7F2521E0A282600DC53E3 /* LoginWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F2511E0A282600DC53E3 /* LoginWindowController.swift */; };
-		31A7F2541E0A283A00DC53E3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F2531E0A283A00DC53E3 /* LoginViewController.swift */; };
 		31A7F2591E0A34D500DC53E3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F2581E0A34D500DC53E3 /* Logger.swift */; };
 		31A7F25B1E0A352B00DC53E3 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31A7F25A1E0A352B00DC53E3 /* SnapKit.framework */; };
 		31A7F25C1E0A352B00DC53E3 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 31A7F25A1E0A352B00DC53E3 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		31A7F25E1E0A4AAF00DC53E3 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F25D1E0A4AAF00DC53E3 /* QRCode.swift */; };
-		31A7F2601E0A66DD00DC53E3 /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7F25F1E0A66DD00DC53E3 /* AppHelper.swift */; };
 		31FC8E161E448B1A003B19BA /* BaseCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FC8E151E448B1A003B19BA /* BaseCommand.swift */; };
 		31FFC4981E03F2E7001D8B8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31FFC4971E03F2E7001D8B8A /* Assets.xcassets */; };
 		31FFC4A41E03F36C001D8B8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */; };
 		31FFC4AB1E03F49F001D8B8A /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4AA1E03F49F001D8B8A /* ScreenRecorder.swift */; };
 		31FFC4AD1E0401E8001D8B8A /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 31FFC4AC1E0401E8001D8B8A /* Cartfile */; };
+		5E722BEA1E646C6200464726 /* AppEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E722BE91E646C6200464726 /* AppEvent.swift */; };
+		5E87184B1E65198800EF67D2 /* LayoutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87184A1E65198800EF67D2 /* LayoutWindowController.swift */; };
+		5E87184D1E6519A500EF67D2 /* LayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87184C1E6519A500EF67D2 /* LayoutViewController.swift */; };
 		5EA68E011E5C8DBD00E5B347 /* MJWindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA68E001E5C8DBD00E5B347 /* MJWindowManager.swift */; };
+		5ED2BF821E66D2FE006F6315 /* AccessibilityElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2BF7C1E66D2FE006F6315 /* AccessibilityElement.swift */; };
+		5ED2BF831E66D2FE006F6315 /* AccessibilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2BF7D1E66D2FE006F6315 /* AccessibilityHelper.swift */; };
+		5ED2BF841E66D2FE006F6315 /* AXValue+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2BF7E1E66D2FE006F6315 /* AXValue+Helper.swift */; };
+		5ED2BF851E66D2FE006F6315 /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2BF7F1E66D2FE006F6315 /* Mouse.swift */; };
+		5ED2BF861E66D2FE006F6315 /* Mover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2BF801E66D2FE006F6315 /* Mover.swift */; };
+		5ED2BF871E66D2FE006F6315 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2BF811E66D2FE006F6315 /* Observer.swift */; };
 		5EE81B8C1E5BDC0C00F00796 /* MyPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE81B8A1E5BDC0C00F00796 /* MyPopoverViewController.swift */; };
 		5EE81B8D1E5BDC0C00F00796 /* MyPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EE81B8B1E5BDC0C00F00796 /* MyPopoverViewController.xib */; };
 		5EE81BBA1E5FD19200F00796 /* ScreenLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE81BB91E5FD19200F00796 /* ScreenLocal.swift */; };
@@ -72,14 +76,9 @@
 		3168902F1E07954E007CDAE8 /* XCGLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCGLogger.framework; path = Carthage/Build/Mac/XCGLogger.framework; sourceTree = "<group>"; };
 		31A7F22C1E0A20E800DC53E3 /* AppStatusItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStatusItem.swift; sourceTree = "<group>"; };
 		31A7F22F1E0A275100DC53E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		31A7F24C1E0A27EA00DC53E3 /* BaseWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseWindowController.swift; sourceTree = "<group>"; };
-		31A7F24E1E0A280100DC53E3 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		31A7F2511E0A282600DC53E3 /* LoginWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWindowController.swift; sourceTree = "<group>"; };
-		31A7F2531E0A283A00DC53E3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		31A7F2581E0A34D500DC53E3 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		31A7F25A1E0A352B00DC53E3 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/Mac/SnapKit.framework; sourceTree = "<group>"; };
 		31A7F25D1E0A4AAF00DC53E3 /* QRCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCode.swift; sourceTree = "<group>"; };
-		31A7F25F1E0A66DD00DC53E3 /* AppHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
 		31FC8E151E448B1A003B19BA /* BaseCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCommand.swift; sourceTree = "<group>"; };
 		31FFC4901E03F2E7001D8B8A /* LiveScreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveScreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31FFC4971E03F2E7001D8B8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,7 +87,16 @@
 		31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = src/AppDelegate.swift; sourceTree = "<group>"; };
 		31FFC4AA1E03F49F001D8B8A /* ScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
 		31FFC4AC1E0401E8001D8B8A /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		5E722BE91E646C6200464726 /* AppEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppEvent.swift; path = src/AppEvent.swift; sourceTree = "<group>"; };
+		5E87184A1E65198800EF67D2 /* LayoutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutWindowController.swift; sourceTree = "<group>"; };
+		5E87184C1E6519A500EF67D2 /* LayoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutViewController.swift; sourceTree = "<group>"; };
 		5EA68E001E5C8DBD00E5B347 /* MJWindowManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJWindowManager.swift; sourceTree = "<group>"; };
+		5ED2BF7C1E66D2FE006F6315 /* AccessibilityElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibilityElement.swift; sourceTree = "<group>"; };
+		5ED2BF7D1E66D2FE006F6315 /* AccessibilityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibilityHelper.swift; sourceTree = "<group>"; };
+		5ED2BF7E1E66D2FE006F6315 /* AXValue+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AXValue+Helper.swift"; sourceTree = "<group>"; };
+		5ED2BF7F1E66D2FE006F6315 /* Mouse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
+		5ED2BF801E66D2FE006F6315 /* Mover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mover.swift; sourceTree = "<group>"; };
+		5ED2BF811E66D2FE006F6315 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		5EE81B8A1E5BDC0C00F00796 /* MyPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPopoverViewController.swift; sourceTree = "<group>"; };
 		5EE81B8B1E5BDC0C00F00796 /* MyPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyPopoverViewController.xib; sourceTree = "<group>"; };
 		5EE81BB81E5EF69300F00796 /* tubbX.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tubbX.entitlements; sourceTree = "<group>"; };
@@ -134,19 +142,9 @@
 			path = src/widget;
 			sourceTree = "<group>";
 		};
-		31A7F2501E0A280900DC53E3 /* login */ = {
-			isa = PBXGroup;
-			children = (
-				31A7F2511E0A282600DC53E3 /* LoginWindowController.swift */,
-				31A7F2531E0A283A00DC53E3 /* LoginViewController.swift */,
-			);
-			name = login;
-			sourceTree = "<group>";
-		};
 		31A7F2551E0A321500DC53E3 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				31A7F25F1E0A66DD00DC53E3 /* AppHelper.swift */,
 				31A7F2581E0A34D500DC53E3 /* Logger.swift */,
 				31A7F25D1E0A4AAF00DC53E3 /* QRCode.swift */,
 			);
@@ -190,11 +188,13 @@
 			children = (
 				5EE81BB81E5EF69300F00796 /* tubbX.entitlements */,
 				31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */,
+				5E722BE91E646C6200464726 /* AppEvent.swift */,
 				31FFC4A61E03F37D001D8B8A /* view */,
 				31FFC4A51E03F37D001D8B8A /* core */,
 				31A7F22B1E0A20D300DC53E3 /* widget */,
 				31FC8E141E448AFF003B19BA /* network */,
 				31A7F2551E0A321500DC53E3 /* util */,
+				5E8718581E65854900EF67D2 /* Libs */,
 				31FFC4A91E03F38A001D8B8A /* support */,
 			);
 			path = tubbX;
@@ -215,9 +215,8 @@
 		31FFC4A61E03F37D001D8B8A /* view */ = {
 			isa = PBXGroup;
 			children = (
-				31A7F24C1E0A27EA00DC53E3 /* BaseWindowController.swift */,
-				31A7F24E1E0A280100DC53E3 /* BaseViewController.swift */,
-				31A7F2501E0A280900DC53E3 /* login */,
+				5E87184A1E65198800EF67D2 /* LayoutWindowController.swift */,
+				5E87184C1E6519A500EF67D2 /* LayoutViewController.swift */,
 			);
 			name = view;
 			path = src/view;
@@ -232,6 +231,28 @@
 				31A7F22E1E0A275100DC53E3 /* Main.storyboard */,
 			);
 			name = support;
+			sourceTree = "<group>";
+		};
+		5E8718581E65854900EF67D2 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				5ED2BF7B1E66D2FE006F6315 /* ModMove */,
+			);
+			name = Libs;
+			path = src/Libs;
+			sourceTree = "<group>";
+		};
+		5ED2BF7B1E66D2FE006F6315 /* ModMove */ = {
+			isa = PBXGroup;
+			children = (
+				5ED2BF7C1E66D2FE006F6315 /* AccessibilityElement.swift */,
+				5ED2BF7D1E66D2FE006F6315 /* AccessibilityHelper.swift */,
+				5ED2BF7E1E66D2FE006F6315 /* AXValue+Helper.swift */,
+				5ED2BF7F1E66D2FE006F6315 /* Mouse.swift */,
+				5ED2BF801E66D2FE006F6315 /* Mover.swift */,
+				5ED2BF811E66D2FE006F6315 /* Observer.swift */,
+			);
+			path = ModMove;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +305,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
+				en,
 			);
 			mainGroup = 31FFC4871E03F2E7001D8B8A;
 			productRefGroup = 31FFC4911E03F2E7001D8B8A /* Products */;
@@ -314,24 +336,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31A7F2541E0A283A00DC53E3 /* LoginViewController.swift in Sources */,
+				5E87184B1E65198800EF67D2 /* LayoutWindowController.swift in Sources */,
 				315AD0561E48209E000D0DDD /* RegisterCommand.swift in Sources */,
 				31FFC4AB1E03F49F001D8B8A /* ScreenRecorder.swift in Sources */,
 				5EE81B8C1E5BDC0C00F00796 /* MyPopoverViewController.swift in Sources */,
+				5E87184D1E6519A500EF67D2 /* LayoutViewController.swift in Sources */,
 				315AD0511E481486000D0DDD /* WSClient.swift in Sources */,
-				31A7F24D1E0A27EA00DC53E3 /* BaseWindowController.swift in Sources */,
-				31A7F2521E0A282600DC53E3 /* LoginWindowController.swift in Sources */,
 				315AD05D1E48671B000D0DDD /* StopRecordCommand.swift in Sources */,
+				5E722BEA1E646C6200464726 /* AppEvent.swift in Sources */,
 				5EA68E011E5C8DBD00E5B347 /* MJWindowManager.swift in Sources */,
+				5ED2BF861E66D2FE006F6315 /* Mover.swift in Sources */,
 				31A7F2591E0A34D500DC53E3 /* Logger.swift in Sources */,
+				5ED2BF831E66D2FE006F6315 /* AccessibilityHelper.swift in Sources */,
 				31688FDA1E0779FE007CDAE8 /* ScreenRTMP.swift in Sources */,
+				5ED2BF841E66D2FE006F6315 /* AXValue+Helper.swift in Sources */,
+				5ED2BF871E66D2FE006F6315 /* Observer.swift in Sources */,
 				315AD05B1E48670E000D0DDD /* StartRecordCommand.swift in Sources */,
 				31FFC4A41E03F36C001D8B8A /* AppDelegate.swift in Sources */,
-				31A7F24F1E0A280100DC53E3 /* BaseViewController.swift in Sources */,
+				5ED2BF821E66D2FE006F6315 /* AccessibilityElement.swift in Sources */,
+				5ED2BF851E66D2FE006F6315 /* Mouse.swift in Sources */,
 				5EE81BBA1E5FD19200F00796 /* ScreenLocal.swift in Sources */,
 				31FC8E161E448B1A003B19BA /* BaseCommand.swift in Sources */,
 				31A7F22D1E0A20E800DC53E3 /* AppStatusItem.swift in Sources */,
-				31A7F2601E0A66DD00DC53E3 /* AppHelper.swift in Sources */,
 				31A7F25E1E0A4AAF00DC53E3 /* QRCode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
