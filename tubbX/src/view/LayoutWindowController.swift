@@ -20,8 +20,11 @@ class LayoutWindowController: NSWindowController {
         super.windowDidLoad()
 
         if let w = self.window, let s = NSScreen.main() {
-            let rect = NSRect(origin: CGPoint.zero, size: CGSize(width: s.frame.size.width, height: w.frame.size.height))
+            let layoutWindowWidth = s.frame.size.width > s.frame.size.height ? s.frame.size.width * 0.5 : s.frame.size.height * 0.5
+            let layoutWindowHeight = layoutWindowWidth * 3 / 4
+            let rect = NSRect(origin: CGPoint.zero, size: CGSize(width: layoutWindowWidth, height: layoutWindowHeight))
             w.setFrame(rect, display: false)
+            w.center()
         }
         
         initView(isVisible: false)
@@ -31,7 +34,7 @@ class LayoutWindowController: NSWindowController {
         //设置为keyWindow 置于前端
         panel.makeKeyAndOrderFront(self)
         //设置透明度
-        panel.animator().alphaValue = 0.3
+        panel.animator().alphaValue = 0.1
         //设置不透明为false
         panel.isOpaque = false
         //忽略鼠标事件
@@ -40,6 +43,7 @@ class LayoutWindowController: NSWindowController {
         //panel.isMovable = false
         //窗口设置为可见
         panel.setIsVisible(isVisible)
+        panel.center()
     }
 
 }

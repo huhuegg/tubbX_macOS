@@ -36,6 +36,23 @@ class AppEvent: NSObject {
                         self.lastWindowInfo = windowInfo
                         
                         if let app = NSRunningApplication(processIdentifier: pid_t(windowInfo.appPid.intValue)) {
+                            let appRef = AXUIElementCreateApplication(app.processIdentifier)
+
+                            var windowsArrRef:CFTypeRef?
+                            if AXUIElementCopyAttributeValue(appRef, kAXWindowsAttribute as CFString, &windowsArrRef) == .success {
+                                let windowArr = CFArrayCreateMutableCopy(kCFAllocatorDefault, 0, windowsArrRef as! CFArray!)
+
+                                for window in windowsArr {
+                                    if let w = window as? AXUIElement {
+                                        dump(w)
+                                    }
+                                }
+                                
+                            }
+
+                            
+                            
+                            
 //                            print("pid:\(app.processIdentifier)   window count:\(app.windows.count)")
 //                            dump(app.windows)
                         }

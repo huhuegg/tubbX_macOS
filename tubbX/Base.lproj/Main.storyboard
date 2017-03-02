@@ -666,8 +666,7 @@
                 <windowController storyboardIdentifier="LayoutWindowController" showSeguePresentationStyle="single" id="PeU-v2-9yr" customClass="LayoutWindowController" customModule="LiveScreen" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" frameAutosaveName="" animationBehavior="default" id="ugy-Wx-i1O" customClass="NSPanel">
                         <windowStyleMask key="styleMask" titled="YES" utility="YES" HUD="YES"/>
-                        <windowPositionMask key="initialPositionMask" bottomStrut="YES"/>
-                        <rect key="contentRect" x="0.0" y="0.0" width="1920" height="500"/>
+                        <rect key="contentRect" x="0.0" y="0.0" width="400" height="300"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
                     </window>
                     <connections>
@@ -682,8 +681,8 @@
         <scene sceneID="1T0-zb-XPW">
             <objects>
                 <viewController storyboardIdentifier="LayoutViewController" id="tLP-9v-rdx" customClass="LayoutViewController" customModule="LiveScreen" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="tqd-hs-Owh">
-                        <rect key="frame" x="0.0" y="0.0" width="1920" height="500"/>
+                    <view key="view" wantsLayer="YES" id="tqd-hs-Owh">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
                 </viewController>

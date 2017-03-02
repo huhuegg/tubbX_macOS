@@ -20,6 +20,9 @@ class AppStatusItem: NSObject {
     
     var isLayoutWindowShowing = false
     
+    var layoutWindowManager:LayoutWindowManager!
+    
+    
     static var instance: AppStatusItem {
         return appStatusItem
     }
@@ -29,6 +32,7 @@ class AppStatusItem: NSObject {
         panel = NSApp.keyWindow as? NSPanel
         popOverViewController = MyPopoverViewController(nibName: "MyPopoverViewController", bundle: nil)
         popOverViewController?.delegate = self
+        layoutWindowManager = LayoutWindowManager()
     }
     
     func createStatusItem() {
@@ -334,14 +338,13 @@ extension AppStatusItem:MyPopoverViewControllerProtocol {
 extension AppStatusItem {
     fileprivate func showLayoutWindow() {
         print("showLayoutWindow")
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        if let layoutWindowController = storyboard.instantiateController(withIdentifier: "LayoutWindowController") as? LayoutWindowController {
+
+        if let layoutWindowController = layoutWindowManager.layoutController() {
             panel = layoutWindowController.window as? NSPanel
             layoutWindowController.initView(isVisible: true)
             isLayoutWindowShowing = true
         }
         
-
     }
     
     fileprivate func closeLayoutWindow() {

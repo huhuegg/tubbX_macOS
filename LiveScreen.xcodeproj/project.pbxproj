@@ -35,12 +35,8 @@
 		5E87184B1E65198800EF67D2 /* LayoutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87184A1E65198800EF67D2 /* LayoutWindowController.swift */; };
 		5E87184D1E6519A500EF67D2 /* LayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87184C1E6519A500EF67D2 /* LayoutViewController.swift */; };
 		5EA68E011E5C8DBD00E5B347 /* MJWindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA68E001E5C8DBD00E5B347 /* MJWindowManager.swift */; };
-		5ED2BF821E66D2FE006F6315 /* AccessibilityElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2BF7C1E66D2FE006F6315 /* AccessibilityElement.swift */; };
-		5ED2BF831E66D2FE006F6315 /* AccessibilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2BF7D1E66D2FE006F6315 /* AccessibilityHelper.swift */; };
-		5ED2BF841E66D2FE006F6315 /* AXValue+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2BF7E1E66D2FE006F6315 /* AXValue+Helper.swift */; };
-		5ED2BF851E66D2FE006F6315 /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2BF7F1E66D2FE006F6315 /* Mouse.swift */; };
-		5ED2BF861E66D2FE006F6315 /* Mover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2BF801E66D2FE006F6315 /* Mover.swift */; };
-		5ED2BF871E66D2FE006F6315 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2BF811E66D2FE006F6315 /* Observer.swift */; };
+		5ED2BF891E67C837006F6315 /* LayoutWindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2BF881E67C837006F6315 /* LayoutWindowManager.swift */; };
+		5ED2BF8C1E67EE68006F6315 /* AppHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ED2BF8B1E67EE68006F6315 /* AppHelper.m */; };
 		5EE81B8C1E5BDC0C00F00796 /* MyPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE81B8A1E5BDC0C00F00796 /* MyPopoverViewController.swift */; };
 		5EE81B8D1E5BDC0C00F00796 /* MyPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EE81B8B1E5BDC0C00F00796 /* MyPopoverViewController.xib */; };
 		5EE81BBA1E5FD19200F00796 /* ScreenLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE81BB91E5FD19200F00796 /* ScreenLocal.swift */; };
@@ -91,15 +87,11 @@
 		5E87184A1E65198800EF67D2 /* LayoutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutWindowController.swift; sourceTree = "<group>"; };
 		5E87184C1E6519A500EF67D2 /* LayoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutViewController.swift; sourceTree = "<group>"; };
 		5EA68E001E5C8DBD00E5B347 /* MJWindowManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJWindowManager.swift; sourceTree = "<group>"; };
-		5ED2BF7C1E66D2FE006F6315 /* AccessibilityElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibilityElement.swift; sourceTree = "<group>"; };
-		5ED2BF7D1E66D2FE006F6315 /* AccessibilityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibilityHelper.swift; sourceTree = "<group>"; };
-		5ED2BF7E1E66D2FE006F6315 /* AXValue+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AXValue+Helper.swift"; sourceTree = "<group>"; };
-		5ED2BF7F1E66D2FE006F6315 /* Mouse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
-		5ED2BF801E66D2FE006F6315 /* Mover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mover.swift; sourceTree = "<group>"; };
-		5ED2BF811E66D2FE006F6315 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		5ED2BF881E67C837006F6315 /* LayoutWindowManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutWindowManager.swift; sourceTree = "<group>"; };
+		5ED2BF8A1E67EE68006F6315 /* AppHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppHelper.h; sourceTree = "<group>"; };
+		5ED2BF8B1E67EE68006F6315 /* AppHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppHelper.m; sourceTree = "<group>"; };
 		5EE81B8A1E5BDC0C00F00796 /* MyPopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPopoverViewController.swift; sourceTree = "<group>"; };
 		5EE81B8B1E5BDC0C00F00796 /* MyPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyPopoverViewController.xib; sourceTree = "<group>"; };
-		5EE81BB81E5EF69300F00796 /* tubbX.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tubbX.entitlements; sourceTree = "<group>"; };
 		5EE81BB91E5FD19200F00796 /* ScreenLocal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenLocal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +137,8 @@
 		31A7F2551E0A321500DC53E3 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				5ED2BF8A1E67EE68006F6315 /* AppHelper.h */,
+				5ED2BF8B1E67EE68006F6315 /* AppHelper.m */,
 				31A7F2581E0A34D500DC53E3 /* Logger.swift */,
 				31A7F25D1E0A4AAF00DC53E3 /* QRCode.swift */,
 			);
@@ -186,7 +180,6 @@
 		31FFC4921E03F2E7001D8B8A /* tubbX */ = {
 			isa = PBXGroup;
 			children = (
-				5EE81BB81E5EF69300F00796 /* tubbX.entitlements */,
 				31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */,
 				5E722BE91E646C6200464726 /* AppEvent.swift */,
 				31FFC4A61E03F37D001D8B8A /* view */,
@@ -203,6 +196,7 @@
 		31FFC4A51E03F37D001D8B8A /* core */ = {
 			isa = PBXGroup;
 			children = (
+				5ED2BF881E67C837006F6315 /* LayoutWindowManager.swift */,
 				5EA68E001E5C8DBD00E5B347 /* MJWindowManager.swift */,
 				31FFC4AA1E03F49F001D8B8A /* ScreenRecorder.swift */,
 				31688FD91E0779FE007CDAE8 /* ScreenRTMP.swift */,
@@ -236,23 +230,9 @@
 		5E8718581E65854900EF67D2 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				5ED2BF7B1E66D2FE006F6315 /* ModMove */,
 			);
 			name = Libs;
 			path = src/Libs;
-			sourceTree = "<group>";
-		};
-		5ED2BF7B1E66D2FE006F6315 /* ModMove */ = {
-			isa = PBXGroup;
-			children = (
-				5ED2BF7C1E66D2FE006F6315 /* AccessibilityElement.swift */,
-				5ED2BF7D1E66D2FE006F6315 /* AccessibilityHelper.swift */,
-				5ED2BF7E1E66D2FE006F6315 /* AXValue+Helper.swift */,
-				5ED2BF7F1E66D2FE006F6315 /* Mouse.swift */,
-				5ED2BF801E66D2FE006F6315 /* Mover.swift */,
-				5ED2BF811E66D2FE006F6315 /* Observer.swift */,
-			);
-			path = ModMove;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,7 +273,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -337,6 +317,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E87184B1E65198800EF67D2 /* LayoutWindowController.swift in Sources */,
+				5ED2BF8C1E67EE68006F6315 /* AppHelper.m in Sources */,
+				5ED2BF891E67C837006F6315 /* LayoutWindowManager.swift in Sources */,
 				315AD0561E48209E000D0DDD /* RegisterCommand.swift in Sources */,
 				31FFC4AB1E03F49F001D8B8A /* ScreenRecorder.swift in Sources */,
 				5EE81B8C1E5BDC0C00F00796 /* MyPopoverViewController.swift in Sources */,
@@ -345,16 +327,10 @@
 				315AD05D1E48671B000D0DDD /* StopRecordCommand.swift in Sources */,
 				5E722BEA1E646C6200464726 /* AppEvent.swift in Sources */,
 				5EA68E011E5C8DBD00E5B347 /* MJWindowManager.swift in Sources */,
-				5ED2BF861E66D2FE006F6315 /* Mover.swift in Sources */,
 				31A7F2591E0A34D500DC53E3 /* Logger.swift in Sources */,
-				5ED2BF831E66D2FE006F6315 /* AccessibilityHelper.swift in Sources */,
 				31688FDA1E0779FE007CDAE8 /* ScreenRTMP.swift in Sources */,
-				5ED2BF841E66D2FE006F6315 /* AXValue+Helper.swift in Sources */,
-				5ED2BF871E66D2FE006F6315 /* Observer.swift in Sources */,
 				315AD05B1E48670E000D0DDD /* StartRecordCommand.swift in Sources */,
 				31FFC4A41E03F36C001D8B8A /* AppDelegate.swift in Sources */,
-				5ED2BF821E66D2FE006F6315 /* AccessibilityElement.swift in Sources */,
-				5ED2BF851E66D2FE006F6315 /* Mouse.swift in Sources */,
 				5EE81BBA1E5FD19200F00796 /* ScreenLocal.swift in Sources */,
 				31FC8E161E448B1A003B19BA /* BaseCommand.swift in Sources */,
 				31A7F22D1E0A20E800DC53E3 /* AppStatusItem.swift in Sources */,
@@ -473,7 +449,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = tubbX/tubbX.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 9M6475P28E;
@@ -499,7 +475,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = tubbX/tubbX.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 9M6475P28E;
