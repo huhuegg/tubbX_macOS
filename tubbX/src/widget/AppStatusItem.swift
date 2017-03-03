@@ -75,7 +75,7 @@ class AppStatusItem: NSObject {
         let menu = NSMenu()
         //布局
         let layoutMenuTitle = isLayoutWindowShowing == true ? "关闭布局窗口":"打开布局窗口"
-        let layoutMenuItem = NSMenuItem(title: layoutMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "")
+        let layoutMenuItem = NSMenuItem(title: layoutMenuTitle, action: #selector(self.menuItemClicked(menuItem:)), keyEquivalent: "l")
         layoutMenuItem.target = self
         layoutMenuItem.representedObject = isLayoutWindowShowing == true ? "CloseLayoutWindow":"ShowLayoutWindow"
         menu.addItem(layoutMenuItem)
@@ -342,13 +342,16 @@ extension AppStatusItem {
         if let layoutWindowController = layoutWindowManager.layoutController() {
             panel = layoutWindowController.window as? NSPanel
             layoutWindowController.initView(isVisible: true)
+            layoutWindowManager.addMouseOperateMonitor()
             isLayoutWindowShowing = true
+            
         }
         
     }
     
     fileprivate func closeLayoutWindow() {
         print("closeLayoutWindow")
+        layoutWindowManager.removeMouseOperateMonitor()
         panel?.close()
 //        NSApp.keyWindow?.setIsVisible(false)
         isLayoutWindowShowing = false

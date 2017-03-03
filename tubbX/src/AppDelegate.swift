@@ -13,9 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        
-        AppEvent.instance.addEvent()
-//        
+  
         AppStatusItem.instance.createStatusItem()
         
         

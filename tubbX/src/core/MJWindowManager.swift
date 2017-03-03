@@ -167,37 +167,6 @@ class MJWindowManager: NSObject {
             print("not found any window")
             return nil
         }
-//        
-//        return windowList.memory as! [AXUIElement]
-//        
-//        if (AXUIElementCopyAttributeValues(appRef, "AXWindows" as CFString, 0, 100, windowList) == 0) {
-//            print("app window count:\(CFArrayGetCount(windows))")
-//        }
-//        
-////        let error = AXUIElementCopyAttributeValue(appElement, kAXWindowAttribute as CFString, windowsRef)
-////        print("app window count:\(CFArrayGetCount(windowsRef))")
-////        if CFArrayGetCount(windowsRef) > 0 {
-////            
-////        }
-////        if let _ = windowsRef {
-////            let windowsArr:CFMutableArray = CFArrayCreateMutableCopy(kCFAllocatorDefault, 0, windowsRef);
-////        }
-////        
-////        CFArrayRef _windows;
-////        if (AXUIElementCopyAttributeValues(app, kAXWindowsAttribute, 0, 100, &_windows) == kAXErrorSuccess) {
-////            return _windows;
-////        }
-////        
-////        
-////        AXUIElementRef appRef = AXUIElementCreateApplication(appPID);
-////        CFArrayRef windowsArrRef = [AccessibilityWrapper windowsInApp:appRef];
-////        if (!windowsArrRef || CFArrayGetCount(windowsArrRef) == 0) continue;
-////        CFMutableArrayRef windowsArr = CFArrayCreateMutableCopy(kCFAllocatorDefault, 0, windowsArrRef);
-////        NSArray *windowSnapshots = [[snapshot apps] objectForKey:appName];
-////        // Check windows
-////        for (NSInteger i = 0; i < CFArrayGetCount(windowsArr); i++) {
-////            SlateLogger(@" Checking Window: %@", [AccessibilityWrapper getTitle:CFArrayGetValueAtIndex(windowsArr, i)]);
-
     }
     
     func find(windowNumber:Int) -> WindowInfo? {
@@ -221,7 +190,7 @@ class MJWindowManager: NSObject {
 
 extension MJWindowManager {
     @objc fileprivate func updateWindowList() {
-        print("updateWindowList")
+        //print("updateWindowList")
         var arr:Array<WindowInfo> = Array()
         var screenRect = CGRect.zero
         guard let screens = NSScreen.screens() else {
@@ -315,7 +284,5 @@ extension MJWindowManager {
 //            
 //        }
     }
-    
-    
-}
 
+}

@@ -31,7 +31,6 @@
 		31FFC4A41E03F36C001D8B8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */; };
 		31FFC4AB1E03F49F001D8B8A /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FFC4AA1E03F49F001D8B8A /* ScreenRecorder.swift */; };
 		31FFC4AD1E0401E8001D8B8A /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 31FFC4AC1E0401E8001D8B8A /* Cartfile */; };
-		5E722BEA1E646C6200464726 /* AppEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E722BE91E646C6200464726 /* AppEvent.swift */; };
 		5E87184B1E65198800EF67D2 /* LayoutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87184A1E65198800EF67D2 /* LayoutWindowController.swift */; };
 		5E87184D1E6519A500EF67D2 /* LayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E87184C1E6519A500EF67D2 /* LayoutViewController.swift */; };
 		5EA68E011E5C8DBD00E5B347 /* MJWindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA68E001E5C8DBD00E5B347 /* MJWindowManager.swift */; };
@@ -83,7 +82,6 @@
 		31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = src/AppDelegate.swift; sourceTree = "<group>"; };
 		31FFC4AA1E03F49F001D8B8A /* ScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
 		31FFC4AC1E0401E8001D8B8A /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		5E722BE91E646C6200464726 /* AppEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppEvent.swift; path = src/AppEvent.swift; sourceTree = "<group>"; };
 		5E87184A1E65198800EF67D2 /* LayoutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutWindowController.swift; sourceTree = "<group>"; };
 		5E87184C1E6519A500EF67D2 /* LayoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutViewController.swift; sourceTree = "<group>"; };
 		5EA68E001E5C8DBD00E5B347 /* MJWindowManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJWindowManager.swift; sourceTree = "<group>"; };
@@ -181,7 +179,6 @@
 			isa = PBXGroup;
 			children = (
 				31FFC4A31E03F36C001D8B8A /* AppDelegate.swift */,
-				5E722BE91E646C6200464726 /* AppEvent.swift */,
 				31FFC4A61E03F37D001D8B8A /* view */,
 				31FFC4A51E03F37D001D8B8A /* core */,
 				31A7F22B1E0A20D300DC53E3 /* widget */,
@@ -325,7 +322,6 @@
 				5E87184D1E6519A500EF67D2 /* LayoutViewController.swift in Sources */,
 				315AD0511E481486000D0DDD /* WSClient.swift in Sources */,
 				315AD05D1E48671B000D0DDD /* StopRecordCommand.swift in Sources */,
-				5E722BEA1E646C6200464726 /* AppEvent.swift in Sources */,
 				5EA68E011E5C8DBD00E5B347 /* MJWindowManager.swift in Sources */,
 				31A7F2591E0A34D500DC53E3 /* Logger.swift in Sources */,
 				31688FDA1E0779FE007CDAE8 /* ScreenRTMP.swift in Sources */,

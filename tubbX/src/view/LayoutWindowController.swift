@@ -34,7 +34,7 @@ class LayoutWindowController: NSWindowController {
         //设置为keyWindow 置于前端
         panel.makeKeyAndOrderFront(self)
         //设置透明度
-        panel.animator().alphaValue = 0.1
+        panel.animator().alphaValue = 0.3
         //设置不透明为false
         panel.isOpaque = false
         //忽略鼠标事件

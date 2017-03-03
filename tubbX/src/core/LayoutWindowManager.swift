@@ -43,6 +43,7 @@ class LayoutWindowManager: NSObject {
     deinit {
         self.removeKeyboardMonitor()
         self.removeMouseMoveMonitor()
+        self.removeMouseOperateMonitor()
     }
     
     //布局窗口
@@ -58,6 +59,8 @@ class LayoutWindowManager: NSObject {
         }
         return self.layoutWindowController
     }
+    
+    
     
     //MARK:- 监听键盘鼠标操作
     //监听键盘功能按键操作
@@ -111,8 +114,17 @@ class LayoutWindowManager: NSObject {
         }
     }
 
-    fileprivate func addMouseOperateMonitor() {
-        NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown,.leftMouseUp,.leftMouseDragged]) { (event) in
+    //移除鼠标移动监听
+    fileprivate func removeMouseMoveMonitor() {
+        if let mouseMonitor = self.mouseMoveMonitor {
+            NSEvent.removeMonitor(mouseMonitor)
+        }
+        self.mouseMoveMonitor = nil
+    }
+    
+    //监听鼠标操作
+    func addMouseOperateMonitor() {
+        self.mouseOperateMonitor = NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown,.leftMouseUp,.leftMouseDragged]) { (event) in
             let point = event.locationInWindow
             let windowNumber = event.windowNumber
             
@@ -123,23 +135,12 @@ class LayoutWindowManager: NSObject {
                         self.lastWindowInfo = nil
                     }
                 }
+                break
             case .leftMouseUp:
-
-                if let windowInfo = self.check(point: point, windowNumber: windowNumber) {
-                    let mounsePoint = self.currentMousePosition()
-                    var ref: AXUIElement?
-                    AXUIElementCopyElementAtPosition(AXUIElementCreateSystemWide(), Float(mounsePoint.x), Float(mounsePoint.y), &ref)
-                    
-                    if let window = self.layoutWindowController?.window {
-                        var size = window.frame.size
-                        let cfSize:CFTypeRef = AXValueCreate(AXValueType(rawValue: kAXValueCGSizeType)!, &size)!;
-                        
-                        AXUIElementSetAttributeValue(ref!, kAXSizeAttribute as CFString, cfSize);
-                    }
-                    
-                }
+                self.changeWindowSizeAndPosition(point: point, windowNumber: windowNumber)
+                break
             case .leftMouseDragged:
-                if let windowInfo = self.check(point: point, windowNumber: windowNumber) {
+                if let _ = self.check(point: point, windowNumber: windowNumber) {
                     if let panel = AppStatusItem.instance.panel {
                         panel.contentView?.wantsLayer = true
                         panel.contentView?.layer?.backgroundColor = NSColor.blue.cgColor
@@ -156,17 +157,18 @@ class LayoutWindowManager: NSObject {
             default:
                 break
             }
-        }
-
+            } as AnyObject?
+        
     }
     
-    //移除鼠标监听
-    fileprivate func removeMouseMoveMonitor() {
-        if let mouseMonitor = self.mouseMoveMonitor {
-            NSEvent.removeMonitor(mouseMonitor)
+    //移除鼠标操作监听
+    func removeMouseOperateMonitor() {
+        if let mouseOperateMonitor = self.mouseOperateMonitor {
+            NSEvent.removeMonitor(mouseOperateMonitor)
         }
-        self.mouseMoveMonitor = nil
+        self.mouseOperateMonitor = nil
     }
+    
     
     //MARK:- 根据组合功能按键状态确定当前所要做的操作
     //操作状态变化
@@ -232,3 +234,75 @@ class LayoutWindowManager: NSObject {
     }
 }
 
+extension LayoutWindowManager {
+    fileprivate func changeWindowSizeAndPosition(point:NSPoint, windowNumber:Int) {
+        if let windowInfo = self.check(point: point, windowNumber: windowNumber) {
+            if self.lastWindowInfo == nil {
+                print("捕获到新窗口 pid:\(windowInfo.appPid.intValue) app:\(windowInfo.appName!) windowName:\(windowInfo.windowName!)")
+                self.lastWindowInfo = windowInfo
+                
+                if let app = NSRunningApplication(processIdentifier: pid_t(windowInfo.appPid.intValue)) {
+                    let appRef = AXUIElementCreateApplication(app.processIdentifier)
+                    
+                    let windowList : UnsafeMutablePointer<AnyObject?> = UnsafeMutablePointer<AnyObject?>.allocate(capacity: 1)
+                    AXUIElementCopyAttributeValue(appRef, "AXWindows" as CFString, windowList)
+
+                    let windows:Array<AXUIElement> = windowList.pointee as! [AXUIElement]
+                    
+                    if let rect = convertLayoutWindowRect() {
+                        changeWindows(windows: windows, rect: rect)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func convertLayoutWindowRect()->NSRect? {
+        if let screens = NSScreen.screens() {
+            var watchScreen:NSScreen?
+            for screen in screens {
+                let displayID = screen.deviceDescription["NSScreenNumber"] as! CGDirectDisplayID
+                if displayID == ScreenRecorder.sharedInstance.lastDisplayID() {
+                    watchScreen = screen
+                }
+            }
+            
+            if let _ = watchScreen {
+                if let layoutWindow = AppStatusItem.instance.layoutWindowManager.layoutController()?.window {
+                    //坐标系需要转换
+                    let rect = CGRect(x: layoutWindow.frame.origin.x, y: watchScreen!.frame.size.height - layoutWindow.frame.size.height - layoutWindow.frame.origin.y, width: layoutWindow.frame.size.width, height: layoutWindow.frame.size.height)
+                    return rect
+                }
+            } else {
+                print("watchScreen is nil")
+            }
+            
+        }
+        return nil
+    }
+    
+    private func changeWindows(windows:Array<AXUIElement>, rect:NSRect) {
+        var layoutWindowSize = rect.size
+        var layoutWindowOrigin = rect.origin
+        
+        for w in windows {
+            //resize
+            var sizeRef:CFTypeRef
+            sizeRef = AXValueCreate(AXValueType.cgSize, &layoutWindowSize)!
+            if AXUIElementSetAttributeValue(w, NSAccessibilitySizeAttribute as CFString, sizeRef) == .success {
+                print("change size ok")
+            } else {
+                print("change size failed")
+            }
+            
+            //origin
+            var originRef:CFTypeRef
+            originRef = AXValueCreate(AXValueType.cgPoint, &layoutWindowOrigin)!
+            if AXUIElementSetAttributeValue(w, NSAccessibilityPositionAttribute as CFString, originRef) == .success {
+                print("change origin ok")
+            } else {
+                print("change origin failed")
+            }
+        }
+    }
+}
